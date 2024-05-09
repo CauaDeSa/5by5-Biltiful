@@ -47,7 +47,8 @@
                 opcao = int.Parse(Console.ReadLine());
             }
 
-            switch (opcao) {
+            switch (opcao)
+            {
                 case 1:
                     CadastrarCliente();
                     break;
