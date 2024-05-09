@@ -1,6 +1,6 @@
 ﻿namespace biltiful.Modulos
 {
-    internal class ModuloRegistro
+    internal class ModuloCadastro
     {
 
         void CadastrarCliente()
@@ -47,7 +47,8 @@
                 opcao = int.Parse(Console.ReadLine());
             }
 
-            switch (opcao) {
+            switch (opcao)
+            {
                 case 1:
                     CadastrarCliente();
                     break;

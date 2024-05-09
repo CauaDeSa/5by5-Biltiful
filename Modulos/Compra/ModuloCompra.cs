@@ -1,43 +1,43 @@
 ﻿namespace biltiful.Modulos
 {
-    internal class ModuloCosmeticos
+    internal class ModuloCompra
     {
 
-        void CadastrarCosmetico()
+        void CadastrarMP()
         {
-            Console.WriteLine("pega os dados para cadastro da cosmetico");
+            Console.WriteLine("pega os dados para cadastro da MP");
             Console.WriteLine("faz trativas");
             Console.WriteLine("salva no arquivo tudo que for necessario");
         }
 
-        void LocalizarCosmetico()
+        void LocalizarMP()
         {
-            Console.WriteLine("pega os dados para localizar cosmetico");
+            Console.WriteLine("pega os dados para localizar MP");
             Console.WriteLine("faz trativas");
             Console.WriteLine("le do arquivo tudo que for necessario");
         }
 
-        void ExcluirCosmetico()
+        void ExcluirMP()
         {
-            Console.WriteLine("pega os dados para excluir cosmetico");
+            Console.WriteLine("pega os dados para excluir MP");
             Console.WriteLine("faz trativas");
-            Console.WriteLine("exclui Cosmetico");
+            Console.WriteLine("exclui MP");
         }
 
-        void ExibirCosmetico()
+        void ExibirMP()
         {
-            Console.WriteLine("pega os dados para exibir cosmetico");
+            Console.WriteLine("pega os dados para exibir MP");
             Console.WriteLine("faz trativas");
-            Console.WriteLine("le do arquivo e exibe cosmetico");
+            Console.WriteLine("le do arquivo e exibe MP");
         }
 
         public void Executar()
         {
             Console.Clear();
-            Console.WriteLine("[ 1 ] Cadastrar cosmetico");
-            Console.WriteLine("[ 2 ] Localizar cosmetico");
-            Console.WriteLine("[ 3 ] Excluir cosmetico");
-            Console.WriteLine("[ 4 ] Exibir cosmetico");
+            Console.WriteLine("[ 1 ] Cadastrar MP");
+            Console.WriteLine("[ 2 ] Localizar MP");
+            Console.WriteLine("[ 3 ] Excluir MP");
+            Console.WriteLine("[ 4 ] Exibir MP");
 
             int opcao = int.Parse(Console.ReadLine());
 
@@ -50,16 +50,16 @@
             switch (opcao)
             {
                 case 1:
-                    CadastrarCosmetico();
+                    CadastrarMP();
                     break;
                 case 2:
-                    LocalizarCosmetico();
+                    LocalizarMP();
                     break;
                 case 3:
-                    ExcluirCosmetico();
+                    ExcluirMP();
                     break;
                 default:
-                    ExibirCosmetico();
+                    ExibirMP();
                     break;
             }
         }

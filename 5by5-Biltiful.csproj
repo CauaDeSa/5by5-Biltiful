@@ -8,4 +8,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Modulos\Cadastro\ClassesCadastro\" />
+    <Folder Include="Modulos\Compra\ClassesCompra\" />
+    <Folder Include="Modulos\Producao\ClassesProducao\" />
+    <Folder Include="Modulos\Venda\ClassesVenda\" />
+  </ItemGroup>
+
 </Project>
