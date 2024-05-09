@@ -1,8 +1,7 @@
 ﻿namespace biltiful.Modulos
 {
-    internal class ModuloCosmeticos
+    internal class ModuloProducao
     {
-
         void CadastrarCosmetico()
         {
             Console.WriteLine("pega os dados para cadastro da cosmetico");
