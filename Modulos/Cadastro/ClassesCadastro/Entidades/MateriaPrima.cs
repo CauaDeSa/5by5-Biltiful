@@ -8,12 +8,12 @@
         public DateOnly DataCadastro { get; set; }         //8 (34-41)
         public char Situacao { get; set; }                 //1 (42)
 
-        public MateriaPrima(string id, string nome, DateOnly dataUltimaCompra, DateOnly dataCadastro, char situacao)
+        public MateriaPrima(string id, string nome, char situacao)
         {
             Id = id;
             Nome = FormatarNome(nome);
-            DataUltimaCompra = dataUltimaCompra;
-            DataCadastro = dataCadastro;
+            DataUltimaCompra = DateOnly.FromDateTime(DateTime.Now);
+            DataCadastro = DateOnly.FromDateTime(DateTime.Now);
             Situacao = situacao;
         }
 

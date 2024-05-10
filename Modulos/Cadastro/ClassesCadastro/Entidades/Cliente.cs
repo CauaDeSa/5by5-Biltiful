@@ -12,14 +12,14 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
         public DateOnly DataCadastro { get; set; }       //8  (78-85)
         public char Situacao { get; set; }               //1  (86-86)
 
-        public Cliente(string cpf, string nome, DateOnly dataNascimento, char sexo, DateOnly dataUltimaCompra, DateOnly dataCadastro, char situacao)
+        public Cliente(string cpf, string nome, DateOnly dataNascimento, char sexo, char situacao)
         {
             CPF = LimparFormatacao(cpf);
             Nome = FormatarNome(nome);
             DataNascimento = dataNascimento;
             Sexo = sexo;
-            DataUltimaCompra = dataUltimaCompra;
-            DataCadastro = dataCadastro;
+            DataUltimaCompra = DateOnly.FromDateTime(DateTime.Now);
+            DataCadastro = DateOnly.FromDateTime(DateTime.Now); ;
             Situacao = situacao;
         }
 

@@ -9,13 +9,13 @@
         public DateOnly DataCadastro { get; set; }        //8   (46-53)
         public char Situacao { get; set; }                //1   (54)
 
-        public Produto(string codigoDeBarras, string nome, int valorVenda, DateOnly dataUltimaVenda, DateOnly dataCadastro, char situacao)
+        public Produto(string codigoDeBarras, string nome, int valorVenda, char situacao)
         {
             CodigoDeBarras = codigoDeBarras;
             Nome = FormatarNome(nome);
             ValorVenda = valorVenda;
-            DataUltimaVenda = dataUltimaVenda;
-            DataCadastro = dataCadastro;
+            DataUltimaVenda = DateOnly.FromDateTime(DateTime.Now); ;
+            DataCadastro = DateOnly.FromDateTime(DateTime.Now); ;
             Situacao = situacao;
         }
 
