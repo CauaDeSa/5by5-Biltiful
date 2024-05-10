@@ -5,7 +5,7 @@
 Desenvolver uma aplicação que irá compartilhar diversas informações entre os “Módulos” que 
 cada integrante da equipe será responsável.
 
-[biltiful.pdf](https://github.com/CauaDeSa/5by5-Biltiful/files/15270553/biltiful.pdf)
+Veja a documentação [aqui](https://github.com/CauaDeSa/5by5-Biltiful/files/15270553/biltiful.pdf)
 
 # Especificações
 
@@ -182,3 +182,16 @@ e final da listagem).
 
 ### Cadastro de Itens de Produção de Cosméticos
 <img src="https://github.com/CauaDeSa/5by5-Biltiful/assets/127906505/06c9582f-cbb1-41ed-ab6d-6a1cb3d249a6" width="520px">
+
+<br><br>
+
+# Ferramenta de Modelação - Miro 
+
+<br>
+
+![image](https://github.com/CauaDeSa/5by5-Biltiful/assets/127906505/a058d34b-ac8d-4043-ab39-3146809d6dfe)
+
+<br>
+
+Veja as modelagens <a href="https://miro.com/welcomeonboard/ZVhpRzhXUW9UcEdGTnJDbjZORHlrM0FzTHdPVFZJa1h6cXhSNmdnOWdwaWtGcDhHdXpHRHRaSFR1UVR3S0Y4dnwzNDU4NzY0NTgyMzgzODI2MDM0fDI=?share_link_id=268663090721" alt="Link workspace utilizado">aqui</a>
+
