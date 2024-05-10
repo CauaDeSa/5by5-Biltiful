@@ -1,12 +1,11 @@
 # 5by5-Biltiful
+
+<br>
+
 Desenvolver uma aplicação que irá compartilhar diversas informações entre os “Módulos” que 
 cada integrante da equipe será responsável.
 
-<br>
-
 [biltiful.pdf](https://github.com/CauaDeSa/5by5-Biltiful/files/15270553/biltiful.pdf)
-
-<br>
 
 # Especificações
 
