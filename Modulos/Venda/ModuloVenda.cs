@@ -10,12 +10,21 @@ namespace biltiful.Modulos
             Console.WriteLine(">>>CADASTRAR VENDA<<<");
             Console.WriteLine("Informe o CPF do cliente: ");
             int cpf = int.Parse(Console.ReadLine());
-
+            string resposta;
+            int cont = 0;
             //imprime na tela o nome e data de nascimento do cliente para fazer uma confirmação
             //e verificar se não esta bloqueado ou é menor de idade
+            do
+            {
+                Console.WriteLine("Informe o código de barras do produto:");
+                Console.WriteLine("Informe a quantidade do produto:");
+                cont ++;
+                Console.WriteLine("Deseja incluir mais um produto? S ou N");
+                resposta = Console.ReadLine();
 
-            Console.WriteLine("faz trativas");
-            Console.WriteLine("salva no arquivo tudo que for necessario");
+            }while (resposta == "S" || resposta == "s" && cont <3);
+            //no maximo 3 produtos
+            Console.WriteLine("Valor total da venda: ");
         }
 
         void LocalizarVenda()

@@ -11,7 +11,6 @@ namespace _5by5_Biltiful.Modulos.Venda.ClassesVenda
     {
         protected ManipularVenda(string diretorio, string arquivo) : base(diretorio, arquivo)
         {
-            void CadastrarVenda();
         }
     }
 }
