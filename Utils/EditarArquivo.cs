@@ -1,28 +1,35 @@
-﻿namespace biltiful.Utils
+﻿namespace _5by5_Biltiful.Utils
 {
     internal class EditorArquivo
     {
-        public string CaminhoDiretorio { get; set; }
-        public string CaminhoArquivo { get; set; }
-        public EditorArquivo(string c, string a)
+        private readonly string CaminhoDiretorio;
+        private readonly string CaminhoArquivo;
+
+        protected EditorArquivo(string diretorio, string arquivo)
         {
-            CaminhoDiretorio = c;
-            CaminhoArquivo = a;
+            CaminhoDiretorio = diretorio;
+            CaminhoArquivo = arquivo;
+
             if (!Directory.Exists(CaminhoDiretorio))
                 Directory.CreateDirectory(CaminhoDiretorio);
+
             if (!File.Exists(CaminhoDiretorio + CaminhoArquivo))
             {
                 var aux = File.Create(CaminhoDiretorio + CaminhoArquivo);
                 aux.Close();
             }
         }
-        public List<string> Ler()
+
+        protected List<string> Ler()
         {
             List<string> conteudo = new();
+            
             foreach (string line in File.ReadAllLines(CaminhoDiretorio + CaminhoArquivo))
                 conteudo.Add(line);
+
             return conteudo;
         }
+
         public void Escrever(List<string> conteudo)
         {
             File.WriteAllLines(CaminhoDiretorio + CaminhoArquivo, conteudo);

@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Modulos\Cadastro\ClassesCadastro\" />
     <Folder Include="Modulos\Compra\ClassesCompra\" />
     <Folder Include="Modulos\Venda\ClassesVenda\" />
   </ItemGroup>
