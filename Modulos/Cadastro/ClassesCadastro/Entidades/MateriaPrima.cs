@@ -11,25 +11,44 @@
         public MateriaPrima(string id, string nome, DateOnly dataUltimaCompra, DateOnly dataCadastro, char situacao)
         {
             Id = id;
-            Nome = nome;
+            Nome = FormatarNome(nome);
             DataUltimaCompra = dataUltimaCompra;
             DataCadastro = dataCadastro;
             Situacao = situacao;
         }
 
-        public MateriaPrima() 
+        public MateriaPrima(string data) 
         {
-        
+            Id = data.Substring(0, 6);
+            Nome = data.Substring(6, 20);
+
+            DataUltimaCompra = ConverterParaData(data.Substring(26, 8));
+            DataCadastro = ConverterParaData(data.Substring(34, 8));
+
+            Situacao = char.Parse(data.Substring(42, 1));
         }
 
         public string FormatarParaArquivo()
         {
-
+            return Id + Nome + LimparFormatacao(DataUltimaCompra.ToString()) + LimparFormatacao(DataCadastro.ToString()) + Situacao;
         }
 
-        static bool VerificarId(int id)
+        private DateOnly ConverterParaData(string data)
         {
+            return DateOnly.ParseExact(data, "ddMMyyyy", null);
+        }
 
+        static string FormatarNome(string nome)
+        {
+            for (int i = nome.Length; i < 50; i++)
+                nome += " ";
+
+            return nome.Substring(0, 50);
+        }
+
+        static string LimparFormatacao(string data)
+        {
+            return data.Replace(".", "").Replace("-", "").Replace(" ", "").Replace("/", "");
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
 {
-    internal class Cliente
+    public class Cliente
     {
         public string CPF { get; set; }                  //11 (0-10)
         public string Nome { get; set; }                 //50 (11-60)
@@ -12,8 +14,8 @@
 
         public Cliente(string cpf, string nome, DateOnly dataNascimento, char sexo, DateOnly dataUltimaCompra, DateOnly dataCadastro, char situacao)
         {
-            CPF = cpf;
-            Nome = nome;
+            CPF = LimparFormatacao(cpf);
+            Nome = FormatarNome(nome);
             DataNascimento = dataNascimento;
             Sexo = sexo;
             DataUltimaCompra = dataUltimaCompra;
@@ -41,12 +43,20 @@
 
         public string FormatarParaArquivo()
         {
-            return CPF + Nome + DataNascimento + Sexo + DataUltimaCompra + DataCadastro + Situacao;
+            return CPF + Nome + LimparFormatacao(DataNascimento.ToString()) + Sexo + LimparFormatacao(DataUltimaCompra.ToString()) + LimparFormatacao(DataCadastro.ToString()) + Situacao;
         }
 
-        static bool VerificarCPF(string cpf)
+        static string FormatarNome(string nome)
         {
+            for (int i = nome.Length; i < 50; i++)
+                nome += " ";
 
+            return nome.Substring(0, 50);
+        }
+
+        public static string LimparFormatacao(string data)
+        {
+            return data.Replace(".", "").Replace("-", "").Replace(" ", "").Replace("/", "");
         }
     }
 }
