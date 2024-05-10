@@ -12,6 +12,17 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
         DateOnly DataProducao;
         string MateriaPrima;
         int QuantidadeMateriaPrima;
+        internal string Diretorio = @"C:\Biltful\";
+        internal string ArquivoMaeria = "Materia.dat";
+        internal string ArquivoItemProducao = "ItemProducao.dat";
+        internal ManipuladorArquivoPrd EditarArquivoItemProducao;
+        internal ManipuladorArquivoPrd EditarArquivoMateiraPrima;
 
+        public ItemProducao()
+        {
+            this.EditarArquivoItemProducao = new ManipuladorArquivoPrd(this.Diretorio, this.ArquivoItemProducao);
+            this.EditarArquivoMateiraPrima = new ManipuladorArquivoPrd(this.Diretorio, this.ArquivoMaeria);
+        }
     }
 }
+
