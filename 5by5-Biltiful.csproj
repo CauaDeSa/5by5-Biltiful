@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="Modulos\Compra\ClassesCompra\" />
-    <Folder Include="Modulos\Venda\ClassesVenda\" />
   </ItemGroup>
 
 </Project>
