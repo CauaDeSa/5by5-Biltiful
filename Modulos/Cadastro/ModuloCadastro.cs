@@ -1,7 +1,25 @@
-﻿namespace biltiful.Modulos
+﻿using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro;
+
+namespace biltiful.Modulos
 {
     internal class ModuloCadastro
     {
+        ManipularCliente mCliente;
+        ManipularProduto mProduto;
+        ManipularMateriaPrima mPrima;
+        ManipularFornecedor mFornecedor;
+        ManipularInadimplentes mInadimplente;
+        ManipularBloqueados mBloqueado;
+
+        public ModuloCadastro(string caminhoDiretorio, string caminhoCliente, string caminhoProduto, string caminhoPrima, string caminhoFornecedor, string caminhoRisco, string caminhoBloqueado)
+        {
+            mCliente = new(caminhoDiretorio, caminhoCliente);
+            mProduto = new(caminhoDiretorio, caminhoProduto);
+            mPrima = new(caminhoDiretorio, caminhoPrima);
+            mFornecedor = new(caminhoDiretorio, caminhoFornecedor);
+            mInadimplente = new(caminhoDiretorio, caminhoRisco);
+            mBloqueado = new(caminhoDiretorio, caminhoBloqueado);
+        }
 
         void CadastrarCliente()
         {
@@ -17,7 +35,7 @@
             Console.WriteLine("Salva no arquivo");
         }
 
-        void CadastrarMP()
+        void CadastrarMateriaPrima()
         {
             Console.WriteLine("Pega os dados do matéria-prima");
             Console.WriteLine("Trata os dados");
@@ -56,7 +74,7 @@
                     CadastrarFornecedor();
                     break;
                 case 3:
-                    CadastrarMP();
+                    CadastrarMateriaPrima();
                     break;
                 default:
                     CadastrarProduto();
