@@ -52,7 +52,7 @@ namespace biltiful.Modulos
         public void Executar()
         {
             Console.Clear();
-            Console.WriteLine("[ 1 ] Cadastrar cliente");
+            Console.Write(@"[ 1 ] Cadastrar cliente");
             Console.WriteLine("[ 2 ] Cadastrar fornecedor");
             Console.WriteLine("[ 3 ] Cadastro matéria-prima");
             Console.WriteLine("[ 4 ] Cadastrar produto");

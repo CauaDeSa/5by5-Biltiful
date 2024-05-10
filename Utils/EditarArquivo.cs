@@ -20,7 +20,7 @@
             }
         }
 
-        protected List<string> Ler()
+        private List<string> Ler()
         {
             List<string> conteudo = new();
             
@@ -34,5 +34,7 @@
         {
             File.WriteAllLines(CaminhoDiretorio + CaminhoArquivo, conteudo);
         }
+
+        public List<string> LerArquivo() => Ler();
     }
 }

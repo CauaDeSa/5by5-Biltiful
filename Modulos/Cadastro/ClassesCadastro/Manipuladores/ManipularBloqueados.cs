@@ -9,6 +9,8 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
         public List<string> Recuperar()
         {
+            base.Ler();
+
 
         }
 
