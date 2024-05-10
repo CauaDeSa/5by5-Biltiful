@@ -14,7 +14,7 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
         internal int Id;
         internal DateOnly DataProducao;
         internal string Produto;
-        internal int Quantidade;
+        internal double Quantidade;
         internal string Diretorio = @"C:\Biltful\";
         internal string ArquivoProdutos = "Cosmetico.dat";
         internal string ArquivoProducao = "Producao.dat";
@@ -27,7 +27,7 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
             this.EditarArquivoProduto = new ManipuladorArquivoPrd(this.Diretorio, this.ArquivoProdutos);
         }
 
-        public Producao(int id, DateOnly d, string p, int qtd)
+        public Producao(int id, DateOnly d, string p, double qtd)
         {
             this.Id = id;
             this.DataProducao = d;
@@ -46,11 +46,11 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
                     string copiaId = line.Substring(0, 5);
                     string copiaData = line.Substring(5, 8);
                     string copiaProduto = line.Substring(13, 13);
-                    string copiaQtd = line.Substring(26, 5);
+                    string copiaQtd = line.Substring(26, 5).Insert(3, ",");
 
                     int parametroId = int.Parse(copiaId);
                     DateOnly parametroData = DateOnly.Parse(copiaData);
-                    int parametroQtd = int.Parse(copiaQtd);
+                    double parametroQtd = double.Parse(copiaQtd);
                     string parametroProduto = copiaProduto;
 
                     copia.Add(new Producao(parametroId, parametroData, parametroProduto, parametroQtd));
@@ -136,7 +136,7 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
                 linha = producao.Id.ToString().PadLeft(5, '0');
                 linha = linha + (producao.DataProducao.ToString("ddmmyyyy"));
                 linha = linha + producao.Produto;
-                linha = linha + (producao.Quantidade.ToString().PadLeft(5, '0'));
+                linha = linha + (producao.Quantidade.ToString().PadLeft(5, '0').Remove(3,1));
                 
                 sw.WriteLine(linha);
             }
