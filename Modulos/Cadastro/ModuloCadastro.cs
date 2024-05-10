@@ -1,4 +1,5 @@
 ﻿using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro;
+using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Validacao;
 
 namespace biltiful.Modulos
 {
@@ -23,9 +24,13 @@ namespace biltiful.Modulos
 
         void CadastrarCliente()
         {
-            Console.WriteLine("Pega os dados do cliente");
-            Console.WriteLine("Trata os dados");
-            Console.WriteLine("Salva no arquivo");
+            Console.WriteLine(" ---- CADASTRO DE CLIENTES ----");
+
+            Console.Write("Insira CPF: ");
+            cpf = ValidarCPF.VerificarCPF(Console.ReadLine());
+
+
+
         }
 
         void CadastrarFornecedor()
@@ -52,14 +57,16 @@ namespace biltiful.Modulos
         public void Executar()
         {
             Console.Clear();
-            Console.Write(@"[ 1 ] Cadastrar cliente");
-            Console.WriteLine("[ 2 ] Cadastrar fornecedor");
-            Console.WriteLine("[ 3 ] Cadastro matéria-prima");
-            Console.WriteLine("[ 4 ] Cadastrar produto");
+
+            Console.Write(@"[ 1 ] Cadastrar cliente
+                            [ 2 ] Cadastrar fornecedor
+                            [ 3 ] Cadastro matéria-prima
+                            [ 4 ] Cadastrar produto
+                            [ 0 ] Voltar");
 
             int opcao = int.Parse(Console.ReadLine());
 
-            while (opcao < 1 || opcao > 4)
+            while (opcao < 0 || opcao > 4)
             {
                 Console.Write("Opcao invalida, tente novamente: ");
                 opcao = int.Parse(Console.ReadLine());

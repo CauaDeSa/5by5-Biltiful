@@ -12,6 +12,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Validacao
         {
             if (id.Length != 6)
                 return false;
+
             if (id[0] != 'M' || id[1] != 'P')
                 return false;
 

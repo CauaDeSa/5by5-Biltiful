@@ -4,18 +4,6 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Validacao;
 
 public static class ValidarCPF
 {
-    public static bool ValidarDV(string cpf, int dv)
-    {
-        int result = 0;
-
-        for (int i = 8 + dv, j = 0; i > 1; i--, j++)
-            result += int.Parse(cpf.Substring(i, 1)) * i;
-
-        result %= 11;
-
-        return (result == 10 ? 0 : result) == int.Parse(cpf.Substring(9, 1));
-    }
-
     public static bool VerificarCPF(string cpf)
     {
         cpf = Cliente.LimparFormatacao(cpf);
@@ -30,5 +18,17 @@ public static class ValidarCPF
             return false;
 
         return ValidarDV(cpf, 1) && ValidarDV(cpf, 2);
+    }
+
+    private static bool ValidarDV(string cpf, int dv)
+    {
+        int result = 0;
+
+        for (int posicao = 0, multiplicador = 8 + dv; posicao < 9; posicao++, multiplicador--)
+            result += int.Parse(cpf.Substring(posicao, 1)) * multiplicador;
+
+        result %= 11;
+
+        return (result == 10 ? 0 : result) == int.Parse(cpf.Substring(8 + dv, 1));
     }
 }
