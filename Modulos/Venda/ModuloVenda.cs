@@ -1,4 +1,8 @@
-﻿using System.ComponentModel;
+﻿using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro;
+using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades;
+using _5by5_Biltiful.Modulos.Venda;
+using _5by5_Biltiful.Modulos.Venda.ClassesVenda;
+using System.ComponentModel;
 
 namespace biltiful.Modulos
 {
@@ -9,22 +13,73 @@ namespace biltiful.Modulos
         {
             Console.WriteLine(">>>CADASTRAR VENDA<<<");
             Console.WriteLine("Informe o CPF do cliente: ");
-            int cpf = int.Parse(Console.ReadLine());
+            string cpf = Console.ReadLine();
+
+            ManipularCliente manipularCliente = new ManipularCliente(@"C:\Dados\", "Clientes.dat");
+            Cliente? cliente = manipularCliente.BuscarPorCPF(cpf);
+
+            if (cliente == null)
+            {
+                Console.WriteLine("Cliente não encontrado. Informe outro CPF.");
+                return; 
+            }
+
+            // validar idade
+            var dataAtual = DateOnly.FromDateTime(DateTime.Now.Date);
+            int idade = (dataAtual.Year - cliente.DataNascimento.Year); // todo: encontrar outra forma de fazer para considerar meses
+            if (idade < 18)
+            {
+                Console.WriteLine("Venda não pode ser realizada - Cliente é menor de idade.");
+                return; // todo: ver se pode ficar assim
+            }
+
+            // imprime cliente
+            Console.WriteLine($"Cliente encontrado\n Nome: {cliente.Nome} - Data Nasc.: {cliente.DataNascimento.ToString("dd/MM/yyyy")}");
+
             string resposta;
             int cont = 0;
-            //imprime na tela o nome e data de nascimento do cliente para fazer uma confirmação
-            //e verificar se não esta bloqueado ou é menor de idade
+            int valorTotal = 0;
+            List<ItemVenda> itens = new List<ItemVenda>();
+
+            ManipularProduto manipularProduto = new ManipularProduto(@"C:\Dados\", "Cosmetico.dat");
+            int idVenda = 1; //todo: fazer função que define o próximo ID a ser gravado
+
             do
             {
-                Console.WriteLine("Informe o código de barras do produto:");
+                Console.WriteLine("Informe o código de barras do produto:");   
+                var codigoProduto = Console.ReadLine();
+                Produto? produto = manipularProduto.BuscarPorCodigoBarras(codigoProduto);
+                if (cliente == null)
+                {
+                    Console.WriteLine("Produto não encontrado. Informe outro código.");
+                    return;
+                }
+
                 Console.WriteLine("Informe a quantidade do produto:");
-                cont ++;
+                int quantidadeProduto = Int32.Parse(Console.ReadLine());
+                if (quantidadeProduto > 999)
+                {
+                    Console.WriteLine("Quantidade máxima permitida é 999.");
+                    return;
+                }
+
+                ItemVenda item = new ItemVenda(idVenda, codigoProduto, quantidadeProduto, produto.ValorVenda, (quantidadeProduto * produto.ValorVenda));
+                itens.Add(item);
+
+                cont++;
                 Console.WriteLine("Deseja incluir mais um produto? S ou N");
                 resposta = Console.ReadLine();
 
-            }while (resposta == "S" || resposta == "s" && cont <3);
+            } while (resposta == "S" || resposta == "s" && cont < 3);
             //no maximo 3 produtos
             Console.WriteLine("Valor total da venda: ");
+
+            Venda venda = new Venda(idVenda, dataAtual, cpf, valorTotal);
+            ManipularVenda manipularVenda = new ManipularVenda(@"C:\Dados\", "Venda.dat");
+            manipularVenda.Escrever(new List<string> { venda.FormatarParaArquivo() });
+
+            //todo:  escrever arquivo item venda
+
         }
 
         void LocalizarVenda()
@@ -55,8 +110,9 @@ namespace biltiful.Modulos
             Console.Clear();
             Console.WriteLine("[ 1 ] CADASTRAR VENDA");
             Console.WriteLine("[ 2 ] LOCALIZAR VENDA");
-            Console.WriteLine("[ 3 ] EXIBIR VENDA");
+            Console.WriteLine("[ 3 ] IMPRIMIR VENDA");
             Console.WriteLine("[ 4 ] EXCLUIR VENDA");
+            Console.WriteLine("[ 0 ] VOLTAR");
 
             int opcao = int.Parse(Console.ReadLine());
 

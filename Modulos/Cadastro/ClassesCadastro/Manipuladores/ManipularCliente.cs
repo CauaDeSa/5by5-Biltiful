@@ -27,9 +27,9 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
         }
 
-        public Cliente? BuscarPorCPF()
+        public Cliente? BuscarPorCPF(string cpf)
         {
-
+            return null;
         }
     }
 }
