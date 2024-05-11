@@ -1,4 +1,6 @@
-﻿namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
+﻿using _5by5_Biltiful.Utils;
+
+namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
 {
     internal class Fornecedor
     {
@@ -11,7 +13,7 @@
 
         public Fornecedor(string cnpj, string razaoSocial, DateOnly dataAbertura, char situacao)
         {
-            CNPJ = LimparFormatacao(cnpj);
+            CNPJ = Formato.LimparFormatacao(cnpj);
             RazaoSocial = FormatarRazaoSocial(razaoSocial);
             DataAbertura = dataAbertura;
             DataUltimaCompra = DateOnly.FromDateTime(DateTime.Now);
@@ -19,22 +21,21 @@
             Situacao = situacao;
         }
 
-
         public Fornecedor(string data)
         {
             CNPJ = data.Substring(0, 14);
             RazaoSocial = data.Substring(14, 50);
 
-            DataAbertura = ConverterParaData(data.Substring(64, 8));
-            DataUltimaCompra = ConverterParaData(data.Substring(72, 8));
-            DataCadastro = ConverterParaData(data.Substring(80, 8));
+            DataAbertura = Formato.ConverterParaData(data.Substring(64, 8));
+            DataUltimaCompra = Formato.ConverterParaData(data.Substring(72, 8));
+            DataCadastro = Formato.ConverterParaData(data.Substring(80, 8));
 
             Situacao = char.Parse(data.Substring(88, 1));
         }
 
         public string FormatarParaArquivo()
         {
-            return CNPJ + RazaoSocial + LimparFormatacao(DataAbertura.ToString()) + LimparFormatacao(DataUltimaCompra.ToString()) + LimparFormatacao(DataCadastro.ToString()) + Situacao;
+            return CNPJ + RazaoSocial + Formato.LimparFormatacao(DataAbertura.ToString()) + Formato.LimparFormatacao(DataUltimaCompra.ToString()) + Formato.LimparFormatacao(DataCadastro.ToString()) + Situacao;
         } 
 
         static string FormatarRazaoSocial(string razaoSocial)
@@ -43,16 +44,6 @@
                 razaoSocial += " ";
 
             return razaoSocial.Substring(0, 50);
-        }
-
-        static string LimparFormatacao(string data)
-        {
-            return data.Replace(".", "").Replace("-", "").Replace(" ", "").Replace("/", "");
-        }
-
-        private DateOnly ConverterParaData(string data)
-        {
-            return DateOnly.ParseExact(data, "ddMMyyyy", null);
         }
     }
 }

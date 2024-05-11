@@ -1,4 +1,6 @@
-﻿namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
+﻿using _5by5_Biltiful.Utils;
+
+namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
 {
     internal class MateriaPrima
     {
@@ -22,20 +24,15 @@
             Id = data.Substring(0, 6);
             Nome = data.Substring(6, 20);
 
-            DataUltimaCompra = ConverterParaData(data.Substring(26, 8));
-            DataCadastro = ConverterParaData(data.Substring(34, 8));
+            DataUltimaCompra = Formato.ConverterParaData(data.Substring(26, 8));
+            DataCadastro = Formato.ConverterParaData(data.Substring(34, 8));
 
             Situacao = char.Parse(data.Substring(42, 1));
         }
 
         public string FormatarParaArquivo()
         {
-            return Id + Nome + LimparFormatacao(DataUltimaCompra.ToString()) + LimparFormatacao(DataCadastro.ToString()) + Situacao;
-        }
-
-        private DateOnly ConverterParaData(string data)
-        {
-            return DateOnly.ParseExact(data, "ddMMyyyy", null);
+            return Id + Nome + Formato.LimparFormatacao(DataUltimaCompra.ToString()) + Formato.LimparFormatacao(DataCadastro.ToString()) + Situacao;
         }
 
         static string FormatarNome(string nome)
@@ -44,11 +41,6 @@
                 nome += " ";
 
             return nome.Substring(0, 50);
-        }
-
-        static string LimparFormatacao(string data)
-        {
-            return data.Replace(".", "").Replace("-", "").Replace(" ", "").Replace("/", "");
         }
     }
 }

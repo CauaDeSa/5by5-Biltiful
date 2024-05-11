@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using _5by5_Biltiful.Utils;
 
 namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
 {
@@ -12,15 +12,14 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
         public DateOnly DataCadastro { get; set; }       //8  (78-85)
         public char Situacao { get; set; }               //1  (86-86)
 
-        public Cliente(string cpf, string nome, DateOnly dataNascimento, char sexo, char situacao)
+        public Cliente(string cpf, string nome, DateOnly dataNascimento, char sexo)
         {
-            CPF = LimparFormatacao(cpf);
+            CPF = Formato.LimparFormatacao(cpf);
             Nome = FormatarNome(nome);
             DataNascimento = dataNascimento;
             Sexo = sexo;
             DataUltimaCompra = DateOnly.FromDateTime(DateTime.Now);
-            DataCadastro = DateOnly.FromDateTime(DateTime.Now); ;
-            Situacao = situacao;
+            DataCadastro = DateOnly.FromDateTime(DateTime.Now);
         }
 
         public Cliente(string data)
@@ -28,22 +27,17 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
             CPF = data.Substring(0, 11);
             Nome = data.Substring(11, 50);
 
-            DataNascimento = ConverterParaData(data.Substring(61, 8));
-            DataUltimaCompra = ConverterParaData(data.Substring(70, 8));
-            DataCadastro = ConverterParaData(data.Substring(78, 8));
+            DataNascimento = Formato.ConverterParaData(data.Substring(61, 8));
+            DataUltimaCompra = Formato.ConverterParaData(data.Substring(70, 8));
+            DataCadastro = Formato.ConverterParaData(data.Substring(78, 8));
 
             Sexo = char.Parse(data.Substring(69, 1));
             Situacao = char.Parse(data.Substring(86, 1));
         }
 
-        private DateOnly ConverterParaData(string data)
-        {
-            return DateOnly.ParseExact(data, "ddMMyyyy", null);
-        }
-
         public string FormatarParaArquivo()
         {
-            return CPF + Nome + LimparFormatacao(DataNascimento.ToString()) + Sexo + LimparFormatacao(DataUltimaCompra.ToString()) + LimparFormatacao(DataCadastro.ToString()) + Situacao;
+            return CPF + Nome + Formato.LimparFormatacao(DataNascimento.ToString()) + Sexo + Formato.LimparFormatacao(DataUltimaCompra.ToString()) + Formato.LimparFormatacao(DataCadastro.ToString()) + Situacao;
         }
 
         static string FormatarNome(string nome)
@@ -52,11 +46,6 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
                 nome += " ";
 
             return nome.Substring(0, 50);
-        }
-
-        public static string LimparFormatacao(string data)
-        {
-            return data.Replace(".", "").Replace("-", "").Replace(" ", "").Replace("/", "");
         }
     }
 }
