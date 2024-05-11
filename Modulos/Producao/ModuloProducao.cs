@@ -1,7 +1,18 @@
-﻿namespace biltiful.Modulos
+﻿using _5by5_Biltiful.Modulos.Producao.ClassesProducao;
+
+namespace biltiful.Modulos
 {
     internal class ModuloProducao
     {
+        ManipuladorArquivoPrd mProducao;
+        ManipuladorArquivoPrd mItemProducao;
+
+        public ModuloProducao(string diretorio, string prd, string itemprd)
+        {
+            mProducao = new ManipuladorArquivoPrd(diretorio, prd);
+            mItemProducao = new ManipuladorArquivoPrd(diretorio, itemprd);
+        }
+
         void CadastrarCosmetico()
         {
             Console.WriteLine("pega os dados para cadastro da cosmetico");
