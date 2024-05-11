@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Validacao
+namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Validacoes
 {
-    internal class ValidarID
+    public static class ValidarMateriaPrima
     {
-        public static bool VerificarID(string id)
+        public static bool ID(string id)
         {
             if (id.Length != 6)
                 return false;
@@ -17,6 +17,11 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Validacao
                 return false;
 
             return int.TryParse(id.Substring(2, 4), out _);
+        }
+
+        public static bool Nome(string nome)
+        {
+            return string.IsNullOrEmpty(nome);
         }
     }
 }

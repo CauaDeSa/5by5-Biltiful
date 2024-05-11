@@ -1,5 +1,5 @@
 ﻿using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro;
-using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Validacao;
+using _5by5_Biltiful.Utils;
 
 namespace biltiful.Modulos
 {
@@ -22,72 +22,141 @@ namespace biltiful.Modulos
             mBloqueado = new(caminhoDiretorio, caminhoBloqueado);
         }
 
-        void CadastrarCliente()
+        void SubModuloCliente()
         {
-            Console.WriteLine(" ---- CADASTRO DE CLIENTES ----");
+            Console.Write(@"----------- Cliente -----------
 
-            Console.Write("Insira CPF: ");
-            cpf = ValidarCPF.VerificarCPF(Console.ReadLine());
+                            [ 1 ] Cadastrar
+                            [ 2 ] Localizar
+                            [ 3 ] Editar
+                            [ 4 ] Imprimir
+                            [ 0 ] Voltar");
 
-
-
+            switch (IO.LerOpcao(4))
+            {
+                case 1:
+                    mCliente.Cadastrar();
+                    break;
+                case 2:
+                    mCliente.Localizar();
+                    break;
+                case 3:
+                    mCliente.Editar();
+                    break;
+                case 4:
+                    mCliente.Imprimir();
+                    break;
+            }
         }
 
-        void CadastrarFornecedor()
+        void SubModuloFornecedor()
         {
-            Console.WriteLine("Pega os dados do fornecedor");
-            Console.WriteLine("Trata os dados");
-            Console.WriteLine("Salva no arquivo");
+            Console.Write(@"----------- Fornecedor -----------
+
+                            [ 1 ] Cadastrar
+                            [ 2 ] Localizar
+                            [ 3 ] Editar
+                            [ 4 ] Imprimir
+                            [ 0 ] Voltar");
+
+            switch (IO.LerOpcao(4))
+            {
+                case 1:
+                    mFornecedor.Cadastrar();
+                    break;
+                case 2:
+                    mFornecedor.Localizar();
+                    break;
+                case 3:
+                    mFornecedor.Editar();
+                    break;
+                case 4:
+                    mFornecedor.Imprimir();
+                    break;
+            }
         }
 
-        void CadastrarMateriaPrima()
+        void SubModuloMateriaPrima()
         {
-            Console.WriteLine("Pega os dados do matéria-prima");
-            Console.WriteLine("Trata os dados");
-            Console.WriteLine("Salva no arquivo");
+            Console.Write(@"----------- Matéria-prima -----------
+
+                            [ 1 ] Cadastrar
+                            [ 2 ] Localizar
+                            [ 3 ] Editar
+                            [ 4 ] Imprimir
+                            [ 0 ] Voltar");
+
+            switch (IO.LerOpcao(4))
+            {
+                case 1:
+                    mPrima.Cadastrar();
+                    break;
+                case 2:
+                    mPrima.Localizar();
+                    break;
+                case 3:
+                    mPrima.Editar();
+                    break;
+                case 4:
+                    mPrima.Imprimir();
+                    break;
+            }
         }
 
-        void CadastrarProduto()
+        void SubModuloProduto()
         {
-            Console.WriteLine("Pega os dados do produto");
-            Console.WriteLine("Trata os dados");
-            Console.WriteLine("Salva no arquivo");
+            Console.Write(@"----------- Produto -----------
+
+                            [ 1 ] Cadastrar
+                            [ 2 ] Localizar
+                            [ 3 ] Editar
+                            [ 4 ] Imprimir
+                            [ 0 ] Voltar");
+
+            switch (IO.LerOpcao(4))
+            {
+                case 1:
+                    mProduto.Cadastrar();
+                    break;
+                case 2:
+                    mProduto.Localizar();
+                    break;
+                case 3:
+                    mProduto.Editar();
+                    break;
+                case 4:
+                    mProduto.Imprimir();
+                    break;
+            }
         }
 
         public void Executar()
         {
             Console.Clear();
 
-            Console.Write(@"[ 1 ] Cadastrar cliente
-                            [ 2 ] Cadastrar fornecedor
-                            [ 3 ] Cadastro matéria-prima
-                            [ 4 ] Cadastrar produto
+            Console.Write(@"----------- CADASTRO -----------
+
+                            [ 1 ] Cliente
+                            [ 2 ] Fornecedor
+                            [ 3 ] Matéria-prima
+                            [ 4 ] Produto
                             [ 0 ] Voltar");
 
-            int opcao = int.Parse(Console.ReadLine());
-
-            while (opcao < 0 || opcao > 4)
-            {
-                Console.Write("Opcao invalida, tente novamente: ");
-                opcao = int.Parse(Console.ReadLine());
-            }
-
-            switch (opcao)
+            switch (IO.LerOpcao(4))
             {
                 case 1:
-                    CadastrarCliente();
+                    SubModuloCliente();
                     break;
                 case 2:
-                    CadastrarFornecedor();
+                    SubModuloFornecedor();
                     break;
                 case 3:
-                    CadastrarMateriaPrima();
+                    SubModuloMateriaPrima();
                     break;
-                default:
-                    CadastrarProduto();
+                case 4:
+                    SubModuloProduto();
                     break;
             }
         }
-
     }
 }

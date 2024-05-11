@@ -9,12 +9,17 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
         public List<string> Recuperar()
         {
+            List<string> cnpjClientes = new();
 
+            foreach (string linha in Ler())
+                cnpjClientes.Add(linha);
+
+            return cnpjClientes;
         }
 
         public void Salvar(List<string> cnpjClientes)
         {
-
+            Escrever(cnpjClientes);
         }
 
         public void Adicionar()
