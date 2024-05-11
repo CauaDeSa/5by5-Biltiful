@@ -7,17 +7,44 @@ namespace biltiful.Modulos
         ManipuladorArquivoPrd mProducao;
         ManipuladorArquivoPrd mItemProducao;
 
+        Producao prd = new Producao();
+        ItemProducao itemprd = new ItemProducao();
+
         public ModuloProducao(string diretorio, string prd, string itemprd)
         {
             mProducao = new ManipuladorArquivoPrd(diretorio, prd);
             mItemProducao = new ManipuladorArquivoPrd(diretorio, itemprd);
         }
-
-        void CadastrarCosmetico()
+        List <ItemProducao> CadastrarItem(List<ItemProducao> copia, int id, DateOnly data)
         {
-            Console.WriteLine("pega os dados para cadastro da cosmetico");
-            Console.WriteLine("faz trativas");
-            Console.WriteLine("salva no arquivo tudo que for necessario");
+            ItemProducao i = new ItemProducao();
+
+
+            List<ItemProducao> novo = i.CriaritemProducao(copia, id, data);
+
+            return novo;
+
+        }
+
+        List <Producao> CadastrarCosmetico (List <Producao> copia)
+        {
+            Producao producao = new Producao();
+
+            List <Producao> p1 = new List<Producao>();
+            foreach (Producao p in copia)
+                p1.Add(p);
+
+
+            producao = producao.CadastrarProducao(p1);
+            
+
+            if (producao != null)
+            {             
+                
+                p1.Add(producao);
+            }
+            return p1;
+                       
         }
 
         void LocalizarCosmetico()
@@ -60,7 +87,21 @@ namespace biltiful.Modulos
             switch (opcao)
             {
                 case 1:
-                    CadastrarCosmetico();
+                    List<Producao> copiado = prd.CopiarArquivo();
+                    List<ItemProducao> itemProducaoCopiado = itemprd.CopiarArquivoItemProducao() ;
+                    
+                    List<Producao> novo = CadastrarCosmetico(copiado);
+                    List<ItemProducao> novoItemPrd = CadastrarItem(itemProducaoCopiado, novo.Last().Id, novo.Last().DataProducao);
+                    if ((novo.Count > copiado.Count && novoItemPrd.Count > itemProducaoCopiado.Count))
+                    {
+                        prd.SalvarArquivoProd(novo);
+                        itemprd.SalvarArquivoItemProd(novoItemPrd);
+                    }
+                    else
+                    {
+                        Console.WriteLine("cadastro não realizado");
+                    }
+                    
                     break;
                 case 2:
                     LocalizarCosmetico();

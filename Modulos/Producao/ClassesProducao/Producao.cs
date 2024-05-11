@@ -15,7 +15,7 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
         internal DateOnly DataProducao;
         internal string Produto;
         internal double Quantidade;
-        internal string Diretorio = @"C:\Biltful\";
+        internal string Diretorio = @"C:\Biltiful\";
         internal string ArquivoProdutos = "Cosmetico.dat";
         internal string ArquivoProducao = "Producao.dat";
         internal ManipuladorArquivoPrd EditarArquivoProducao;
@@ -35,7 +35,7 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
             this.Quantidade = qtd;
         }
 
-        public List<Producao> CopiaArquivo()
+        public List<Producao> CopiarArquivo()
         {
             List<Producao> copia = new List<Producao>();
 
@@ -47,6 +47,7 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
                     string copiaData = line.Substring(5, 8);
                     string copiaProduto = line.Substring(13, 13);
                     string copiaQtd = line.Substring(26, 5).Insert(3, ",");
+                    copiaData = copiaData.Substring(0, 2) + "/" + copiaData.Substring(2, 2) + "/" + copiaData.Substring(4, 4);
 
                     int parametroId = int.Parse(copiaId);
                     DateOnly parametroData = DateOnly.Parse(copiaData);
@@ -60,7 +61,7 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
             return copia;
         }
 
-        public string? VerificaProdutoExiste(string codBarras)
+        public string? VerificarProdutoExiste(string codBarras)
         {
             string? nome = "";
             foreach (var produto in EditarArquivoProduto.LerArquivo())
@@ -74,21 +75,30 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
             return nome;
         }
 
-        int RetornaIdAtual(List <Producao> copia) // recebe a lista copiada como parametro
+        int RetornarIdAtual(List <Producao> copia) // recebe a lista copiada como parametro
         {
-            Producao last = copia.Last();
-            int lastId = last.Id;
-            int currentId = lastId + 1;
-            return currentId;
+            if (copia.Count != 0) 
+            {
+                Producao last = copia.Last();
+                int lastId = last.Id;
+                int currentId = lastId + 1;
+                return currentId;
+            }
+            else
+            {
+                return 1;
+            }
         }
         
-        public Producao Cadastro(List<Producao> copia) // recebe a lista que foi copiada para realizar o cadastro
+        public Producao CadastrarProducao(List<Producao> copia) // recebe a lista que foi copiada para realizar o cadastro
         {
             Producao cadastro = new Producao();
             try
             {
                 bool controle= false;
-                int id = RetornaIdAtual(copia);
+                int id = RetornarIdAtual(copia);
+                DateOnly data;
+                string nome;
                 do
                 {
                     Console.WriteLine("Digite o Codigo de barras do Produto que deseja produzir");
@@ -99,11 +109,16 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
                     }
                     else
                     {
-                        string nome = VerificaProdutoExiste(CodBarrasProduto);
+                        nome = VerificarProdutoExiste(CodBarrasProduto);
                         if (nome != "")
                         {
                             Console.WriteLine($"Produção de: {nome}");
-                            controle = true;                            
+                            Console.WriteLine("Digite uma qtsd");
+                            double qtd = double.Parse(Console.ReadLine());
+                            controle = true;
+                            data = DateOnly.FromDateTime(DateTime.Now);
+                            
+                            cadastro = new Producao(id, data, CodBarrasProduto, qtd);
                         }
                         else
                         {
@@ -113,30 +128,28 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
 
                 } while (controle == false);
 
-                
                 return cadastro;
+
 
             }
             catch (Exception)
             {
-
-                throw;
-            }
-
-            
+                Console.WriteLine("O cadastro não foi possível");
+                return null;
+            }            
         }
 
 
-        public void SaveArquivoProd(List<Producao> atual)
+        public void SalvarArquivoProd(List<Producao> atual)
         {
             StreamWriter sw = new StreamWriter(this.Diretorio + this.ArquivoProducao);
             foreach (var producao in atual)
             {
                 string linha;
                 linha = producao.Id.ToString().PadLeft(5, '0');
-                linha = linha + (producao.DataProducao.ToString("ddmmyyyy"));
+                linha = linha + (producao.DataProducao.ToString("ddMMyyyy"));
                 linha = linha + producao.Produto;
-                linha = linha + (producao.Quantidade.ToString().PadLeft(5, '0').Remove(3,1));
+                linha = linha + (producao.Quantidade.ToString("000.00").Remove(3,1));
                 
                 sw.WriteLine(linha);
             }
