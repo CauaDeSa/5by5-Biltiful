@@ -1,4 +1,6 @@
-﻿namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
+﻿using _5by5_Biltiful.Utils;
+
+namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
 {
     internal class Produto
     {
@@ -9,13 +11,13 @@
         public DateOnly DataCadastro { get; set; }        //8   (46-53)
         public char Situacao { get; set; }                //1   (54)
 
-        public Produto(string codigoDeBarras, string nome, int valorVenda, DateOnly dataUltimaVenda, DateOnly dataCadastro, char situacao)
+        public Produto(string codigoDeBarras, string nome, int valorVenda, char situacao)
         {
             CodigoDeBarras = codigoDeBarras;
             Nome = FormatarNome(nome);
             ValorVenda = valorVenda;
-            DataUltimaVenda = dataUltimaVenda;
-            DataCadastro = dataCadastro;
+            DataUltimaVenda = DateOnly.FromDateTime(DateTime.Now); ;
+            DataCadastro = DateOnly.FromDateTime(DateTime.Now); ;
             Situacao = situacao;
         }
 
@@ -25,20 +27,15 @@
             Nome = data.Substring(13, 20);
             ValorVenda = int.Parse(data.Substring(33, 5));
 
-            DataUltimaVenda = ConverterParaData(data.Substring(38, 8));
-            DataCadastro = ConverterParaData(data.Substring(46, 8));
+            DataUltimaVenda = Formato.ConverterParaData(data.Substring(38, 8));
+            DataCadastro = Formato.ConverterParaData(data.Substring(46, 8));
 
             Situacao = char.Parse(data.Substring(54, 1));
         }
 
         public string FormatarParaArquivo()
         {
-            return CodigoDeBarras + Nome + ValorVenda + LimparFormatacao(DataUltimaVenda.ToString()) + LimparFormatacao(DataCadastro.ToString()) + Situacao;
-        }
-
-        private DateOnly ConverterParaData(string data)
-        {
-            return DateOnly.ParseExact(data, "ddMMyyyy", null);
+            return CodigoDeBarras + Nome + ValorVenda + Formato.LimparFormatacao(DataUltimaVenda.ToString()) + Formato.LimparFormatacao(DataCadastro.ToString()) + Situacao;
         }
 
         static string FormatarNome(string nome)
@@ -47,11 +44,6 @@
                 nome += " ";
 
             return nome.Substring(0, 50);
-        }
-
-        static string LimparFormatacao(string data)
-        {
-            return data.Replace(".", "").Replace("-", "").Replace(" ", "").Replace("/", "");
         }
     }
 }

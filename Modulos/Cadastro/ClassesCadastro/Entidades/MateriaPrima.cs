@@ -1,4 +1,6 @@
-﻿namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
+﻿using _5by5_Biltiful.Utils;
+
+namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
 {
     internal class MateriaPrima
     {
@@ -8,12 +10,12 @@
         public DateOnly DataCadastro { get; set; }         //8 (34-41)
         public char Situacao { get; set; }                 //1 (42)
 
-        public MateriaPrima(string id, string nome, DateOnly dataUltimaCompra, DateOnly dataCadastro, char situacao)
+        public MateriaPrima(string id, string nome, char situacao)
         {
             Id = id;
             Nome = FormatarNome(nome);
-            DataUltimaCompra = dataUltimaCompra;
-            DataCadastro = dataCadastro;
+            DataUltimaCompra = DateOnly.FromDateTime(DateTime.Now);
+            DataCadastro = DateOnly.FromDateTime(DateTime.Now);
             Situacao = situacao;
         }
 
@@ -22,20 +24,15 @@
             Id = data.Substring(0, 6);
             Nome = data.Substring(6, 20);
 
-            DataUltimaCompra = ConverterParaData(data.Substring(26, 8));
-            DataCadastro = ConverterParaData(data.Substring(34, 8));
+            DataUltimaCompra = Formato.ConverterParaData(data.Substring(26, 8));
+            DataCadastro = Formato.ConverterParaData(data.Substring(34, 8));
 
             Situacao = char.Parse(data.Substring(42, 1));
         }
 
         public string FormatarParaArquivo()
         {
-            return Id + Nome + LimparFormatacao(DataUltimaCompra.ToString()) + LimparFormatacao(DataCadastro.ToString()) + Situacao;
-        }
-
-        private DateOnly ConverterParaData(string data)
-        {
-            return DateOnly.ParseExact(data, "ddMMyyyy", null);
+            return Id + Nome + Formato.LimparFormatacao(DataUltimaCompra.ToString()) + Formato.LimparFormatacao(DataCadastro.ToString()) + Situacao;
         }
 
         static string FormatarNome(string nome)
@@ -44,11 +41,6 @@
                 nome += " ";
 
             return nome.Substring(0, 50);
-        }
-
-        static string LimparFormatacao(string data)
-        {
-            return data.Replace(".", "").Replace("-", "").Replace(" ", "").Replace("/", "");
         }
     }
 }
