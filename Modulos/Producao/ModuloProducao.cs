@@ -47,72 +47,116 @@ namespace biltiful.Modulos
                        
         }
 
-        void LocalizarCosmetico()
+        void Pause()
         {
-            Console.WriteLine("pega os dados para localizar cosmetico");
-            Console.WriteLine("faz trativas");
-            Console.WriteLine("le do arquivo tudo que for necessario");
+            Producao p = new Producao();
+            p.Pause();
         }
 
-        void ExcluirCosmetico()
+        void LocalizarProducao(List<Producao> producoes, List<ItemProducao> itens)
         {
-            Console.WriteLine("pega os dados para excluir cosmetico");
-            Console.WriteLine("faz trativas");
-            Console.WriteLine("exclui Cosmetico");
+            Producao p = new Producao();
+
+            p.LocalizarProducao(producoes, itens);
         }
 
-        void ExibirCosmetico()
+        void ExcluirProducao(List<Producao> atual, List<ItemProducao> itensAtual)
         {
-            Console.WriteLine("pega os dados para exibir cosmetico");
-            Console.WriteLine("faz trativas");
-            Console.WriteLine("le do arquivo e exibe cosmetico");
+            Producao p = new Producao();
+            ItemProducao i = new ItemProducao();    
+            int id = p.RetornarIdExcluisao();
+
+            List<Producao> producaos = p.ExcluirProducao(atual, id);
+            List<ItemProducao> ip = i.ExcluirItem(itensAtual, id);
+
+            prd.SalvarArquivoProd(producaos);
+            itemprd.SalvarArquivoItemProd(ip);
+        }
+
+        void ExibirTodaProducao(List<Producao> producoes, List<ItemProducao> itens)
+        {
+            Producao p = new Producao();
+
+            p.ImprimirProducao(producoes, itens);
         }
 
         public void Executar()
         {
-            Console.Clear();
-            Console.WriteLine("[ 1 ] Cadastrar cosmetico");
-            Console.WriteLine("[ 2 ] Localizar cosmetico");
-            Console.WriteLine("[ 3 ] Excluir cosmetico");
-            Console.WriteLine("[ 4 ] Exibir cosmetico");
-
-            int opcao = int.Parse(Console.ReadLine());
-
-            while (opcao < 1 || opcao > 4)
+            int opcao;
+            do
             {
-                Console.Write("Opcao invalida, tente novamente: ");
-                opcao = int.Parse(Console.ReadLine());
-            }
+                opcao = -1;
+                Console.Clear();
+                Console.WriteLine("[ 1 ] Cadastrar Produção");
+                Console.WriteLine("[ 2 ] Localizar Produção");
+                Console.WriteLine("[ 3 ] Excluir Produção");
+                Console.WriteLine("[ 4 ] Exibir todas as Produções");
+                Console.WriteLine("[ 0 ] Sair da Produção");
 
-            switch (opcao)
-            {
-                case 1:
-                    List<Producao> copiado = prd.CopiarArquivo();
-                    List<ItemProducao> itemProducaoCopiado = itemprd.CopiarArquivoItemProducao() ;
-                    
-                    List<Producao> novo = CadastrarCosmetico(copiado);
-                    List<ItemProducao> novoItemPrd = CadastrarItem(itemProducaoCopiado, novo.Last().Id, novo.Last().DataProducao);
-                    if ((novo.Count > copiado.Count && novoItemPrd.Count > itemProducaoCopiado.Count))
+
+
+
+                while (opcao < 0 || opcao > 4)
+                {
+                    try
                     {
-                        prd.SalvarArquivoProd(novo);
-                        itemprd.SalvarArquivoItemProd(novoItemPrd);
+                        opcao = int.Parse(Console.ReadLine());
+                        if (opcao < 0 || opcao > 4)
+                            Console.WriteLine(opcao + "Opção Inexistente");
                     }
-                    else
+                    catch (Exception)
                     {
-                        Console.WriteLine("cadastro não realizado");
+                        Console.WriteLine("Valor invalido!");
                     }
-                    
-                    break;
-                case 2:
-                    LocalizarCosmetico();
-                    break;
-                case 3:
-                    ExcluirCosmetico();
-                    break;
-                default:
-                    ExibirCosmetico();
-                    break;
-            }
+
+                }
+
+                switch (opcao)
+                {
+                    case 1:
+                        List<Producao> copiado = prd.CopiarArquivo();
+                        List<ItemProducao> itemProducaoCopiado = itemprd.CopiarArquivoItemProducao();
+
+                        List<Producao> novo = CadastrarCosmetico(copiado);
+                        List<ItemProducao> novoItemPrd = CadastrarItem(itemProducaoCopiado, novo.Last().Id, novo.Last().DataProducao);
+                        if ((novo.Count > copiado.Count && novoItemPrd.Count > itemProducaoCopiado.Count))
+                        {
+                            prd.SalvarArquivoProd(novo);
+                            itemprd.SalvarArquivoItemProd(novoItemPrd);
+                        }
+                        else
+                        {
+                            Console.WriteLine("cadastro não realizado");
+                        }
+                        Pause();
+                        break;
+                    case 2:
+                        List<Producao> producoesLocaliza = prd.CopiarArquivo();
+                        List<ItemProducao> itemProducaoLocaliza = itemprd.CopiarArquivoItemProducao();
+                        LocalizarProducao(producoesLocaliza, itemProducaoLocaliza);
+                        Pause();
+                        break;
+                    case 3:
+                        List<Producao> preExclusao = prd.CopiarArquivo();
+                        List<ItemProducao> itemPreExclusao = itemprd.CopiarArquivoItemProducao();
+                        ExcluirProducao(preExclusao, itemPreExclusao);
+                        Pause();
+                        break;
+                    case 4:
+                        List<Producao> producoesExiste = prd.CopiarArquivo();
+                        List<ItemProducao> itensProducao = itemprd.CopiarArquivoItemProducao();
+                        ExibirTodaProducao(producoesExiste, itensProducao);
+                        Pause();
+                        break;
+                    case 0:
+                        Console.WriteLine("Saindo da Produção...");
+                        Pause();
+                        break;
+                    default:
+                        Console.WriteLine("Opção não existente!");
+                        break;
+                }
+            } while (opcao != 0);
         }
 
     }

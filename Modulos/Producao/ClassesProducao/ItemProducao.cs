@@ -170,6 +170,40 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
             return nome;
         }
 
+        public void ImprimirItensProducao(List<ItemProducao> itens, int id)
+        {
+            
+            foreach (var item in itens)
+            {
+                if (item.Id  == id)
+                {
+                    Console.Write("id Item Produção: " + item.Id.ToString().PadLeft(5,'0'));
+                    Console.Write(" ,Data Item Produção" + item.DataProducao);
+                    string nomeMP = VerificarEAtiva(item.MateriaPrima);
+                    Console.Write($",nome matéria-prima: {nomeMP} e código: {item.MateriaPrima} ");
+                    Console.WriteLine(" ,quantidade de matéria-prima utilizada: " + item.QuantidadeMateriaPrima);
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        public List<ItemProducao> ExcluirItem(List<ItemProducao> copia, int id)
+        {
+            List<ItemProducao> copiado = new List<ItemProducao>();
+
+            foreach (var item in copia)
+            {
+                copiado.Add(item);
+            }
+
+            foreach (var item in copia)
+            {
+                if (item.Id.Equals(id))
+                    copiado.Remove(item);
+            }
+            return copiado;
+        }
+
         public void SalvarArquivoItemProd(List <ItemProducao> atual)
         {
             StreamWriter sw = new StreamWriter(this.Diretorio + this.ArquivoItemProducao);
