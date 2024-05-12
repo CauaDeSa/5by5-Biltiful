@@ -14,7 +14,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
         public Fornecedor(string cnpj, string razaoSocial, DateOnly dataAbertura, char situacao)
         {
             CNPJ = Formato.LimparFormatacao(cnpj);
-            RazaoSocial = FormatarRazaoSocial(razaoSocial);
+            RazaoSocial = razaoSocial.PadRight(50).Substring(0, 50);
             DataAbertura = dataAbertura;
             DataUltimaCompra = DateOnly.FromDateTime(DateTime.Now);
             DataCadastro = DateOnly.FromDateTime(DateTime.Now);
@@ -37,13 +37,5 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
         {
             return CNPJ + RazaoSocial + Formato.LimparFormatacao(DataAbertura.ToString()) + Formato.LimparFormatacao(DataUltimaCompra.ToString()) + Formato.LimparFormatacao(DataCadastro.ToString()) + Situacao;
         } 
-
-        static string FormatarRazaoSocial(string razaoSocial)
-        {
-            for (int i = razaoSocial.Length; i < 50; i++)
-                razaoSocial += " ";
-
-            return razaoSocial.Substring(0, 50);
-        }
     }
 }

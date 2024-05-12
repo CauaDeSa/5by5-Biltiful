@@ -14,7 +14,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
         public Produto(string codigoDeBarras, string nome, int valorVenda, char situacao)
         {
             CodigoDeBarras = codigoDeBarras;
-            Nome = FormatarNome(nome);
+            Nome = nome.PadRight(20).Substring(0, 20);
             ValorVenda = valorVenda;
             DataUltimaVenda = DateOnly.FromDateTime(DateTime.Now); ;
             DataCadastro = DateOnly.FromDateTime(DateTime.Now); ;

@@ -13,7 +13,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
         public MateriaPrima(string id, string nome, char situacao)
         {
             Id = id;
-            Nome = FormatarNome(nome);
+            Nome = nome.PadRight(20).Substring(0, 20);
             DataUltimaCompra = DateOnly.FromDateTime(DateTime.Now);
             DataCadastro = DateOnly.FromDateTime(DateTime.Now);
             Situacao = situacao;
