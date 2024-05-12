@@ -16,7 +16,7 @@
         public static DateOnly LerData()
         {
             DateOnly data;
-            Console.write("Data: ");1
+            Console.Write("Data: ");
 
             while (!DateOnly.TryParse(Console.ReadLine(), out data))
                 Console.Write("Data invalida, tente novamente: ");

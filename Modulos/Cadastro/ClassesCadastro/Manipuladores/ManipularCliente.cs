@@ -1,4 +1,4 @@
-﻿using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades;
+using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades;
 using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Validacoes;
 using _5by5_Biltiful.Utils;
 
