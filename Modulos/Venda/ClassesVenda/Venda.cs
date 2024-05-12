@@ -1,4 +1,5 @@
 ﻿using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades;
+using _5by5_Biltiful.Utils;
 using System.Security.Cryptography;
 
 namespace _5by5_Biltiful.Modulos.Venda.ClassesVenda
@@ -19,10 +20,10 @@ namespace _5by5_Biltiful.Modulos.Venda.ClassesVenda
         }
         public Venda(string data)
         {
-            Id = int.Parse(data.Substring(0, 5));
-            DataVenda = ConverterParaData(data.Substring(5, 8));
-            Cliente = data.Substring(13, 11);
-            ValorTotal = int.Parse(data.Substring(24, 7));
+            Id = int.Parse(data.Substring(0, 5).Replace(" ", ""));
+            DataVenda = ConverterParaData(data.Substring(5, 8).Replace(" ", ""));
+            Cliente = data.Substring(13, 11).Replace(" ", "");
+            ValorTotal = int.Parse(data.Substring(24, 7).Replace(" ", ""));
         }
         private DateOnly ConverterParaData(string data)
         {
@@ -30,7 +31,8 @@ namespace _5by5_Biltiful.Modulos.Venda.ClassesVenda
         }
         public string FormatarParaArquivo()
         {
-            return Id + ";" + DataVenda + ";" + Cliente + ";" + ValorTotal;
+            //String coNum = customerOrderLine.PadRight(5, 'x');
+            return Id.ToString().PadRight(5,' ') + Formato.LimparFormatacao(DataVenda.ToString()).PadRight(8,' ') + Cliente.PadRight(11, ' ') + ValorTotal.ToString().PadRight(7, ' ');
         }
     }
 }

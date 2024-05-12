@@ -8,6 +8,17 @@ namespace biltiful.Modulos
 {
     internal class ModuloVenda
     {
+        ManipularVenda manipularVenda;
+        ManipularVenda manipularItemVenda;
+        ManipularCliente manipularCliente;
+        ManipularProduto manipularProduto;
+        public ModuloVenda(string caminhoDiretorio, string arquivoVenda, string arquivoItemVenda, string arquivoCliente, string arquivoProduto)
+        {
+            manipularVenda = new ManipularVenda(caminhoDiretorio,arquivoVenda);
+            manipularItemVenda = new ManipularVenda(caminhoDiretorio, arquivoItemVenda);
+            manipularCliente = new ManipularCliente(caminhoDiretorio, arquivoCliente);
+            manipularProduto = new ManipularProduto(caminhoDiretorio, arquivoProduto);
+        }
 
         void CadastrarVenda()
         {
@@ -15,8 +26,7 @@ namespace biltiful.Modulos
             Console.WriteLine("Informe o CPF do cliente: ");
             string cpf = Console.ReadLine();
 
-            ManipularCliente manipularCliente = new ManipularCliente(@"C:\Dados\", "Clientes.dat");
-            Cliente? cliente = manipularCliente.BuscarPorCPF(cpf);
+            Cliente? cliente = new Cliente("34141198897", "Ze", DateOnly.Parse("1990-03-10"), 'F');//manipularCliente.BuscarPorCPF(cpf);
 
             if (cliente == null)
             {
@@ -30,7 +40,7 @@ namespace biltiful.Modulos
             if (idade < 18)
             {
                 Console.WriteLine("Venda não pode ser realizada - Cliente é menor de idade.");
-                return; // todo: ver se pode ficar assim
+                return; // todo: ver se pode ficar assim - return pra sair fora
             }
 
             // imprime cliente
@@ -41,14 +51,13 @@ namespace biltiful.Modulos
             int valorTotal = 0;
             List<ItemVenda> itens = new List<ItemVenda>();
 
-            ManipularProduto manipularProduto = new ManipularProduto(@"C:\Dados\", "Cosmetico.dat");
-            int idVenda = 1; //todo: fazer função que define o próximo ID a ser gravado
+            int idVenda = GerarIdVenda();
 
             do
             {
                 Console.WriteLine("Informe o código de barras do produto:");   
                 var codigoProduto = Console.ReadLine();
-                Produto? produto = manipularProduto.BuscarPorCodigoBarras(codigoProduto);
+                Produto? produto = new Produto("7891", "Protetor Solar", 10, 'A');// todo: usa a busca de produto quando estiver funcionando - manipularProduto.BuscarPorCodigoBarras(codigoProduto);
                 if (cliente == null)
                 {
                     Console.WriteLine("Produto não encontrado. Informe outro código.");
@@ -76,9 +85,10 @@ namespace biltiful.Modulos
 
             Venda venda = new Venda(idVenda, dataAtual, cpf, valorTotal);
             ManipularVenda manipularVenda = new ManipularVenda(@"C:\Dados\", "Venda.dat");
-            manipularVenda.Escrever(new List<string> { venda.FormatarParaArquivo() });
+            manipularVenda.CadastrarVenda(venda);
 
-            //todo:  escrever arquivo item venda
+            ManipularVenda manipularItemVenda = new ManipularVenda(@"C:\Dados\", "ItemVenda.dat");
+            manipularItemVenda.CadastrarItemVenda(itens);
 
         }
 
@@ -105,6 +115,14 @@ namespace biltiful.Modulos
             Console.WriteLine("exclui venda");
         }
 
+        int GerarIdVenda()
+        {
+            var vendas = manipularVenda.BuscarVendas();
+            int ultimoId = vendas.OrderByDescending(e => e.Id).First().Id;
+
+            return ultimoId + 1;
+        }
+
         public void Executar()
         {
             Console.Clear();
@@ -116,7 +134,7 @@ namespace biltiful.Modulos
 
             int opcao = int.Parse(Console.ReadLine());
 
-            while (opcao < 1 || opcao > 4)
+            while (opcao < 0 || opcao > 4)
             {
                 Console.Write("Opcao inválida, tente novamente: ");
                 opcao = int.Parse(Console.ReadLine());
