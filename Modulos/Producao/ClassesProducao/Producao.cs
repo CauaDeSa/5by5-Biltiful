@@ -15,9 +15,9 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
         internal DateOnly DataProducao;
         internal string Produto;
         internal double Quantidade;
-        internal string Diretorio = @"C:\Biltiful\";
-        internal string ArquivoProdutos = "Cosmetico.dat";
-        internal string ArquivoProducao = "Producao.dat";
+        internal string Diretorio ;
+        internal string ArquivoProdutos;
+        internal string ArquivoProducao;
         internal ManipuladorArquivoPrd EditarArquivoProducao;
         internal ManipuladorArquivoPrd EditarArquivoProduto;
 
@@ -29,8 +29,16 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
 
         public Producao()
         {
-            this.EditarArquivoProducao = new ManipuladorArquivoPrd(this.Diretorio, this.ArquivoProducao);
-            this.EditarArquivoProduto = new ManipuladorArquivoPrd(this.Diretorio, this.ArquivoProdutos);
+            
+        }
+
+        public Producao(string dir, string prd, string pdt)
+        {
+            this.EditarArquivoProducao = new ManipuladorArquivoPrd(dir, prd);
+            this.EditarArquivoProduto = new ManipuladorArquivoPrd(dir, pdt);
+            this.Diretorio = dir;
+            this.ArquivoProducao = prd;
+            this.ArquivoProdutos = pdt;
         }
 
         public Producao(int id, DateOnly d, string p, double qtd)
@@ -119,7 +127,7 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
                         if (nome != "")
                         {
                             Console.WriteLine($"Produção de: {nome}");
-                            Console.WriteLine("Digite uma qtsd");
+                            Console.WriteLine("Digite uma quantidade");
                             double qtd = double.Parse(Console.ReadLine());
                             controle = true;
                             data = DateOnly.FromDateTime(DateTime.Now);
@@ -271,9 +279,9 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
                 if (item.Id == id)
                 {
                     Console.Write("Id da produção: " + item.Id.ToString().PadLeft(5, '0'));
-                    Console.Write(" ,Data da Produção: " + item.DataProducao);
+                    Console.Write(",Data da Produção: " + item.DataProducao);
                     string nomeProduto = VerificarProdutoExiste(item.Produto);
-                    Console.Write($" ,Produto Produzido:{nomeProduto}, código: {item.Produto}");
+                    Console.Write($",Produto Produzido:{nomeProduto}, código: {item.Produto}");
                     Console.WriteLine(" Quantidade Produzida: " + item.Quantidade);
                     Console.WriteLine();
 
