@@ -15,7 +15,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
         public Cliente(string cpf, string nome, DateOnly dataNascimento, char sexo)
         {
             CPF = Formato.LimparFormatacao(cpf);
-            Nome = FormatarNome(nome);
+            Nome = nome.PadRight(50);
             DataNascimento = dataNascimento;
             Sexo = sexo;
             DataUltimaCompra = DateOnly.FromDateTime(DateTime.Now);
@@ -40,12 +40,9 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
             return CPF + Nome + Formato.LimparFormatacao(DataNascimento.ToString()) + Sexo + Formato.LimparFormatacao(DataUltimaCompra.ToString()) + Formato.LimparFormatacao(DataCadastro.ToString()) + Situacao;
         }
 
-        static string FormatarNome(string nome)
+        public override string ToString()
         {
-            for (int i = nome.Length; i < 50; i++)
-                nome += " ";
-
-            return nome.Substring(0, 50);
+            return $"CPF: {CPF}\nNome: {Nome}\nData de Nascimento: {DataNascimento}\nSexo: {Sexo}\nSituacao: {Situacao}";
         }
     }
 }
