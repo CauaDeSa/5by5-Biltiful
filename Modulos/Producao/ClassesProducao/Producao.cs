@@ -40,7 +40,7 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
             this.Produto = p;
             this.Quantidade = qtd;
         }
-
+        // copia arquivo
         public List<Producao> CopiarArquivo()
         {
             List<Producao> copia = new List<Producao>();
