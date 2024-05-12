@@ -57,7 +57,7 @@ namespace biltiful
         {
             ModuloCadastro moduloCadastro = new(caminhoDiretorioProjeto, caminhoClientes, caminhoProdutos, caminhoMateriasPrimas, caminhoFornecedores, caminhoRiscos, caminhoBloqueados);
             //ModuloVenda moduloVenda = new(caminhoDiretorioProjeto, caminhoVendas, caminhoItensVenda);
-            //ModuloCompra moduloCompra = new(caminhoDiretorioProjeto, caminhoCompras, caminhoItensCompra);
+            ModuloCompra moduloCompra = new(caminhoDiretorioProjeto, caminhoCompras, caminhoItensCompra);
             //ModuloProducao moduloProducao = new(caminhoDiretorioProjeto, caminhoProducoes, caminhoItensProducao);
 
             int opcao;

@@ -21,7 +21,6 @@ namespace Compras
         // Valor total do item (quantidade x valor unidade)
         public decimal ValorTotalItem => Quantidade * ValorUnitario;
 
-
         // Método para solicitar e validar os dados do item ao usuário
         public void SolicitarDadosItem() // solicita ao usuário que insira os detalhes
         {
