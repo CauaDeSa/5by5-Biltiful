@@ -14,7 +14,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
         public Produto(string codigoDeBarras, string nome, int valorVenda, char situacao)
         {
             CodigoDeBarras = codigoDeBarras;
-            Nome = FormatarNome(nome);
+            Nome = nome.PadRight(20).Substring(0, 20);
             ValorVenda = valorVenda;
             DataUltimaVenda = DateOnly.FromDateTime(DateTime.Now); ;
             DataCadastro = DateOnly.FromDateTime(DateTime.Now); ;
@@ -38,12 +38,9 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
             return CodigoDeBarras + Nome + ValorVenda + Formato.LimparFormatacao(DataUltimaVenda.ToString()) + Formato.LimparFormatacao(DataCadastro.ToString()) + Situacao;
         }
 
-        static string FormatarNome(string nome)
+        public override string ToString()
         {
-            for (int i = nome.Length; i < 50; i++)
-                nome += " ";
-
-            return nome.Substring(0, 50);
+            return $"Codigo de Barras: {CodigoDeBarras}\nNome: {Nome}\nValor de Venda: {ValorVenda}\nData ultima venda: {DataUltimaVenda}\nData cadastro: {DataCadastro}\nSituacao: {Situacao}";
         }
     }
 }

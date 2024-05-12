@@ -13,7 +13,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
         public MateriaPrima(string id, string nome, char situacao)
         {
             Id = id;
-            Nome = FormatarNome(nome);
+            Nome = nome.PadRight(20).Substring(0, 20);
             DataUltimaCompra = DateOnly.FromDateTime(DateTime.Now);
             DataCadastro = DateOnly.FromDateTime(DateTime.Now);
             Situacao = situacao;
@@ -35,12 +35,9 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
             return Id + Nome + Formato.LimparFormatacao(DataUltimaCompra.ToString()) + Formato.LimparFormatacao(DataCadastro.ToString()) + Situacao;
         }
 
-        static string FormatarNome(string nome)
+        public override string ToString()
         {
-            for (int i = nome.Length; i < 50; i++)
-                nome += " ";
-
-            return nome.Substring(0, 50);
+            return $"Id: {Id}\nNome: {Nome}\nData ultima compra: {DataUltimaCompra}\nData cadastro: {DataCadastro}\nSituacao: {Situacao}";
         }
     }
 }
