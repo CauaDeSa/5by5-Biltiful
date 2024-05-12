@@ -1,12 +1,21 @@
-﻿using Compras;
+﻿using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades;
+using Compras;
 using System;
 
 namespace biltiful.Modulos
 {
     internal class ModuloCompra
     {
-        private readonly string _caminhoArquivoCompras = "compras.txt";
-        private readonly string _caminhoArquivoItens = "itens.txt";
+        private readonly string _caminhoArquivoCompras;
+        private readonly string _caminhoArquivoItens;
+        private readonly string caminhoDiretorio;
+
+        public ModuloCompra(string caminhoDiretorioProjeto, string caminhoCompras, string caminhoItensCompra)
+        {
+            _caminhoArquivoCompras = caminhoCompras;
+            _caminhoArquivoItens = caminhoItensCompra;
+            caminhoDiretorio = caminhoDiretorioProjeto;
+        }
 
         public void Executar()
         {
@@ -92,7 +101,7 @@ namespace biltiful.Modulos
         public void SalvarCompra(Compra compra)
         {
             // 1. Abrir arquivo de compras para escrita
-            using (StreamWriter writerCompras = new StreamWriter(_caminhoArquivoCompras, append: true))
+            using (StreamWriter writerCompras = new StreamWriter(caminhoDiretorio + _caminhoArquivoCompras, append: true))
             {
                 // 2. Escrever dados da compra no arquivo
                 writerCompras.WriteLine($"{compra.Id},{compra.DataCompra},{compra.CnpjFornecedor}");
@@ -104,7 +113,7 @@ namespace biltiful.Modulos
         public void SalvarItensCompra(List<ItemCompra> itensCompra)
         {
             // 1 Abrir arquivo de itens para escrita
-            using (StreamWriter writerItens = new StreamWriter(_caminhoArquivoItens, append: true))
+            using (StreamWriter writerItens = new StreamWriter(caminhoDiretorio + _caminhoArquivoItens, append: true))
                 // 2 Escrever dados de cada item no arquivo
                 foreach (ItemCompra item in itensCompra)
                     writerItens.WriteLine($"{item.Descricao},{item.Quantidade},{item.ValorUnitario}");
@@ -152,7 +161,7 @@ namespace biltiful.Modulos
 
             try
             {
-                using (StreamReader reader = new StreamReader(_caminhoArquivoCompras))
+                using (StreamReader reader = new StreamReader(caminhoDiretorio + _caminhoArquivoCompras))
                 {
                     string linha;
                     while ((linha = reader.ReadLine()) != null)
@@ -186,14 +195,13 @@ namespace biltiful.Modulos
         {
             List<ItemCompra> itensCompra = new List<ItemCompra>();
 
-            // Path to the item file can be modified as needed
-            string caminhoArquivoItens = Path.Combine(Path.GetDirectoryName(_caminhoArquivoCompras), $"itens_{idCompra}.txt");
+            //string caminhoArquivoItens = Path.Combine(Path.GetDirectoryName(caminhoDiretorio + _caminhoArquivoCompras), $"itens_{idCompra}.txt");
 
             if (File.Exists(caminhoArquivoItens))
             {
                 try
                 {
-                    using (StreamReader reader = new StreamReader(caminhoArquivoItens))
+                    using (StreamReader reader = new StreamReader(caminhoDiretorio + caminhoArquivoItens))
                     {
                         string linha;
                         while ((linha = reader.ReadLine()) != null)
@@ -252,15 +260,15 @@ namespace biltiful.Modulos
                     // 5. Reescrever o arquivo de compras com a lista atualizada
                     try
                     {
-                        using (StreamWriter writer = new StreamWriter(_caminhoArquivoCompras, false)) // Overwrite existing content
+                        using (StreamWriter writer = new StreamWriter(caminhoDiretorio + _caminhoArquivoCompras, false)) 
                         {
                             foreach (Compra compra in listaCompras)
                             {
                                 writer.WriteLine($"{compra.Id},{compra.DataCompra},{compra.CnpjFornecedor}");
                             }
                         }
-                        // 6. Deletar o arquivo de itens associado (assuming single item file)
-                        string caminhoArquivoItens = Path.Combine(Path.GetDirectoryName(_caminhoArquivoCompras), $"itens_{idCompra}.txt");
+                        // 6. Deletar o arquivo de itens associado
+                        //string caminhoArquivoItens = Path.Combine(Path.GetDirectoryName(_caminhoArquivoCompras), $"itens_{idCompra}.txt");
                         if (File.Exists(caminhoArquivoItens))
                         {
                             File.Delete(caminhoArquivoItens);
