@@ -32,12 +32,12 @@
             return (result == 0 || result == 1 ? 0 : 11 - result) == int.Parse(cpf.Substring(11 + dv, 1));
         }
 
-        public bool RazaoSocial(string razaoSocial)
+        public static bool RazaoSocial(string razaoSocial)
         {
             return string.IsNullOrEmpty(razaoSocial);
         }
 
-        public bool DataAbertura(string data)
+        public static bool DataAbertura(string data)
         {
             return data.Length == 8 && DateOnly.TryParse(data, out _);
         }

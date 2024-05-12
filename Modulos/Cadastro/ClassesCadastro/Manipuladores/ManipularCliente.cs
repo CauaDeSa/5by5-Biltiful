@@ -65,13 +65,13 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
         public char LerSexo()
         {
-            char sexo;
+            string sexo;
             Console.Write("Insira o sexo (M/F): ");
 
-            while (!ValidarCliente.Sexo(sexo = char.Parse(Console.ReadLine())))
+            while (!ValidarCliente.Sexo(sexo = Console.ReadLine()))
                 Console.Write("Sexo invalido, tente novamente: ");
 
-            return sexo;
+            return char.Parse(sexo);
         }
 
         public char LerSituacao()
@@ -91,11 +91,13 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             DateOnly dataNascimento;
             char sexo;
 
+            List<Cliente> clientes = RecuperarArquivo();
+
             Console.WriteLine(">>> CADASTRO DE CLIENTE <<<");
 
             cpf = LerCPF();
 
-            while (RecuperarArquivo().Exists(cliente => cliente.CPF == cpf))
+            while (clientes.Exists(cliente => cliente.CPF == cpf))
             {
                 Console.WriteLine("CPF já cadastrado");
                 cpf = LerCPF();
@@ -107,9 +109,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
             sexo = LerSexo();
 
-            List<Cliente> clientes = RecuperarArquivo();
-
-            clientes.Add(new Cliente(cpf + nome + dataNascimento + sexo));
+            clientes.Add(new Cliente(cpf, nome, dataNascimento, sexo));
 
             SalvarArquivo(clientes);
 
@@ -119,9 +119,9 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
         public void Editar()
         {
             List<Cliente> clientes = RecuperarArquivo();
-            Cliente cliente;
+            Cliente? cliente;
             string cpfCliente;
-            int option;
+            int opcao;
 
             Console.WriteLine(">>> EDIÇÃO DE CLIENTE <<<");
 
@@ -135,7 +135,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                 return;
             }
 
-            Console.WriteLine($"Cliente encontrado: \n{cliente.ToString()}\n\n");
+            Console.WriteLine($"Cliente encontrado: \n{cliente}\n\n");
 
             do
             {
@@ -147,11 +147,11 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                                     [ 4 ] Situacao
                                     [ 0 ] Voltar");
 
-                option = IO.LerOpcao(4);
+                opcao = IO.LerOpcao(4);
 
                 Console.Clear();
 
-                switch (option)
+                switch (opcao)
                 {
                     case 1:
                         cliente.Nome = LerNome().PadRight(50).Substring(0, 50);
@@ -192,13 +192,13 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                 return;
             }
 
-            Console.WriteLine($"\n{cliente.ToString()}\n\n");
+            Console.WriteLine($"\n{cliente}\n\n");
         }
 
         public void Imprimir()
         {
             List<Cliente> clientes = RecuperarArquivo();
-            int option, indice;
+            int opcao, indice;
 
             if (clientes.Count == 0)
             {
@@ -212,9 +212,9 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             {
                 Console.Clear();
 
-                Console.WriteLine($"\n{clientes[indice].ToString()}\n\n");
+                Console.WriteLine($"\n{clientes[indice]}\n\n");
 
-                option = IO.LerOpcao(4);
+                opcao = IO.LerOpcao(4);
 
                 Console.WriteLine(@">>> Menu impressao <<<
 
@@ -224,7 +224,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                                 [ 4 ] Final
                                 [ 0 ] Voltar");
 
-                switch ()
+                switch (opcao)
                 {
                     case 1:
                         indice = indice == clientes.Count - 1 ? 0 : indice + 1;
@@ -239,7 +239,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                         indice = clientes.Count - 1;
                         break;
                 }
-            } while (option != 0);
+            } while (opcao != 0);
         }
     }
 }

@@ -18,7 +18,7 @@
             return string.IsNullOrEmpty(nome);
         }
 
-        public static bool ValorVenda(string valor)
+        public static bool ValorVenda(string? valor)
         {
             if (!float.TryParse(valor, out float preco))
                 return false;

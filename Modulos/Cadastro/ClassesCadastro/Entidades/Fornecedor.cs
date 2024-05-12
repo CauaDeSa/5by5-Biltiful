@@ -11,14 +11,14 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
         public DateOnly DataCadastro { get; set; }      //8 (80-87)
         public char Situacao { get; set; }              //1 (88-88)
 
-        public Fornecedor(string cnpj, string razaoSocial, DateOnly dataAbertura, char situacao)
+        public Fornecedor(string cnpj, string razaoSocial, DateOnly dataAbertura)
         {
             CNPJ = Formato.LimparFormatacao(cnpj);
             RazaoSocial = razaoSocial.PadRight(50).Substring(0, 50);
             DataAbertura = dataAbertura;
             DataUltimaCompra = DateOnly.FromDateTime(DateTime.Now);
             DataCadastro = DateOnly.FromDateTime(DateTime.Now);
-            Situacao = situacao;
+            Situacao = 'A';
         }
 
         public Fornecedor(string data)

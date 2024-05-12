@@ -22,7 +22,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
         {
             List<string> conteudo = new();
 
-            produtos.Sort((produtoA, produtoB) => produtoA.Nome.CompareTo(produtoB.Nome))
+            produtos.Sort((produtoA, produtoB) => produtoA.Nome.CompareTo(produtoB.Nome));
 
             foreach (Produto produto in produtos)
                 conteudo.Add(produto.ToString());
@@ -52,20 +52,21 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             return nome;
         }
 
-        public int LerValorVenda()
+        public string LerValorVenda()
         {
-            float valorVenda;
+            string? valorVenda;
             Console.Write("Insira o preço: R$");
 
-            while (ValidarProduto.ValorVenda(valorVenda = Console.ReadLine())))
+            while (ValidarProduto.ValorVenda(valorVenda = Console.ReadLine()))
                 Console.Write("Preço inválido, tente novamente: R$");
 
-            return float.Parse(valorVenda);
+            return valorVenda;
         }
 
         public void Cadastrar()
         {
-            string codigoBarras, nome, descricao, valorVenda;
+            string codigoBarras, nome;
+            string valorVenda;
 
             Console.WriteLine(">>> CADASTRO DE PRODUTO <<<");
 
@@ -102,6 +103,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
         public void Editar()
         {
             string codigoBarras, nome, descricao, valorVenda;
+            int opcao;
 
             Console.WriteLine(">>> EDIÇÃO DE PRODUTOS <<<");
 
@@ -117,7 +119,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                 return;
             }
 
-            Console.WriteLine($"Produto encontrado: \n{produto.ToString()}\n\n");
+            Console.WriteLine($"Produto encontrado: \n{produto}\n\n");
 
             do
             {
@@ -128,13 +130,18 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                                     [ 3 ] Situacao
                                     [ 0 ] Voltar");
 
-                switch (IO.LerOpcao(3))
+                opcao = IO.LerOpcao(3);
+
+                Console.Clear();
+
+                switch (opcao)
                 {
                     case 1:
                         produto.Nome = LerNome().PadRight(20).Substring(0, 20);
                         break;
                     case 2:
                         produto.ValorVenda = LerValorVenda();
+                        break;
                     case 3: 
                         produto.Situacao = LerSituacao();
                         break;
@@ -167,7 +174,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                 return;
             }
 
-            Console.WriteLine($"\n{produto.ToString()}\n\n");
+            Console.WriteLine($"\n{produto}\n\n");
         }
 
         public void Imprimir()
@@ -187,9 +194,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             {
                 Console.Clear();
 
-                Console.WriteLine($"\n{clientes[indice].ToString()}\n\n");
-
-                option = IO.LerOpcao(4);
+                Console.WriteLine($"\n{produtos[indice]}\n\n");
 
                 Console.WriteLine(@">>> Menu impressao <<<
 
@@ -199,19 +204,21 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                                 [ 4 ] Final
                                 [ 0 ] Voltar");
 
-                switch ()
+                option = IO.LerOpcao(4);
+
+                switch (option)
                 {
                     case 1:
-                        indice = indice == clientes.Count - 1 ? 0 : indice + 1;
+                        indice = indice == produtos.Count - 1 ? 0 : indice + 1;
                         break;
                     case 2:
-                        indice = indice == 0 ? clientes.Count - 1 : indice - 1;
+                        indice = indice == 0 ? produtos.Count - 1 : indice - 1;
                         break;
                     case 3:
                         indice = 0;
                         break;
                     case 4:
-                        indice = clientes.Count - 1;
+                        indice = produtos.Count - 1;
                         break;
                 }
             } while (option != 0);

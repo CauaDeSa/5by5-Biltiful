@@ -18,8 +18,8 @@ namespace biltiful.Modulos
             mProduto = new(caminhoDiretorio, caminhoProduto);
             mPrima = new(caminhoDiretorio, caminhoPrima);
             mFornecedor = new(caminhoDiretorio, caminhoFornecedor);
-            mInadimplente = new(caminhoDiretorio, caminhoRisco);
-            mBloqueado = new(caminhoDiretorio, caminhoBloqueado);
+            mInadimplente = new(caminhoDiretorio, caminhoRisco, caminhoCliente);
+            mBloqueado = new(caminhoDiretorio, caminhoBloqueado, caminhoFornecedor);
         }
 
         void SubModuloCliente()
@@ -142,7 +142,7 @@ namespace biltiful.Modulos
         {
             Console.Clear();
 
-            Console.WriteLineLine(@">>> MENU CADASTRO <<<
+            Console.WriteLine(@">>> MENU CADASTRO <<<
 
                             [ 1 ] Cliente
                             [ 2 ] Fornecedor
