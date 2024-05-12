@@ -7,13 +7,15 @@ namespace biltiful.Modulos
         ManipuladorArquivoPrd mProducao;
         ManipuladorArquivoPrd mItemProducao;
 
-        Producao prd = new Producao();
-        ItemProducao itemprd = new ItemProducao();
+        Producao prd;
+        ItemProducao itemPrd;
 
-        public ModuloProducao(string diretorio, string prd, string itemprd)
+        public ModuloProducao(string diretorio, string prd, string itemprd, string produtos, string materias)
         {
             mProducao = new ManipuladorArquivoPrd(diretorio, prd);
             mItemProducao = new ManipuladorArquivoPrd(diretorio, itemprd);
+            this.prd = new Producao(diretorio, prd, produtos);
+            this.itemPrd = new ItemProducao(diretorio, itemprd, materias);
         }
         List <ItemProducao> CadastrarItem(List<ItemProducao> copia, int id, DateOnly data)
         {
@@ -70,7 +72,7 @@ namespace biltiful.Modulos
             List<ItemProducao> ip = i.ExcluirItem(itensAtual, id);
 
             prd.SalvarArquivoProd(producaos);
-            itemprd.SalvarArquivoItemProd(ip);
+            itemPrd.SalvarArquivoItemProd(ip);
         }
 
         void ExibirTodaProducao(List<Producao> producoes, List<ItemProducao> itens)
@@ -115,14 +117,14 @@ namespace biltiful.Modulos
                 {
                     case 1:
                         List<Producao> copiado = prd.CopiarArquivo();
-                        List<ItemProducao> itemProducaoCopiado = itemprd.CopiarArquivoItemProducao();
+                        List<ItemProducao> itemProducaoCopiado = itemPrd.CopiarArquivoItemProducao();
 
                         List<Producao> novo = CadastrarCosmetico(copiado);
                         List<ItemProducao> novoItemPrd = CadastrarItem(itemProducaoCopiado, novo.Last().Id, novo.Last().DataProducao);
                         if ((novo.Count > copiado.Count && novoItemPrd.Count > itemProducaoCopiado.Count))
                         {
                             prd.SalvarArquivoProd(novo);
-                            itemprd.SalvarArquivoItemProd(novoItemPrd);
+                            itemPrd.SalvarArquivoItemProd(novoItemPrd);
                         }
                         else
                         {
@@ -132,19 +134,19 @@ namespace biltiful.Modulos
                         break;
                     case 2:
                         List<Producao> producoesLocaliza = prd.CopiarArquivo();
-                        List<ItemProducao> itemProducaoLocaliza = itemprd.CopiarArquivoItemProducao();
+                        List<ItemProducao> itemProducaoLocaliza = itemPrd.CopiarArquivoItemProducao();
                         LocalizarProducao(producoesLocaliza, itemProducaoLocaliza);
                         Pause();
                         break;
                     case 3:
                         List<Producao> preExclusao = prd.CopiarArquivo();
-                        List<ItemProducao> itemPreExclusao = itemprd.CopiarArquivoItemProducao();
+                        List<ItemProducao> itemPreExclusao = itemPrd.CopiarArquivoItemProducao();
                         ExcluirProducao(preExclusao, itemPreExclusao);
                         Pause();
                         break;
                     case 4:
                         List<Producao> producoesExiste = prd.CopiarArquivo();
-                        List<ItemProducao> itensProducao = itemprd.CopiarArquivoItemProducao();
+                        List<ItemProducao> itensProducao = itemPrd.CopiarArquivoItemProducao();
                         ExibirTodaProducao(producoesExiste, itensProducao);
                         Pause();
                         break;

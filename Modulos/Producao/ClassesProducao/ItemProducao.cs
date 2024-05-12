@@ -13,16 +13,24 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
         DateOnly DataProducao;
         string MateriaPrima;
         double QuantidadeMateriaPrima;
-        internal string Diretorio = @"C:\Biltiful\";
-        internal string ArquivoMateria = "Materia.dat";
-        internal string ArquivoItemProducao = "ItemProducao.dat";
+        internal string Diretorio;
+        internal string ArquivoMateria;
+        internal string ArquivoItemProducao;
         internal ManipuladorArquivoPrd ManipularArquivoItemProducao;
         internal ManipuladorArquivoPrd ManipularArquivoMateriaPrima;
 
         public ItemProducao()
         {
-            this.ManipularArquivoItemProducao = new ManipuladorArquivoPrd(this.Diretorio, this.ArquivoItemProducao);
-            this.ManipularArquivoMateriaPrima = new ManipuladorArquivoPrd(this.Diretorio, this.ArquivoMateria);
+            
+        }
+
+        public ItemProducao(string dir, string itemprd, string materias)
+        {
+            this.ManipularArquivoItemProducao = new ManipuladorArquivoPrd(dir, itemprd);
+            this.ManipularArquivoMateriaPrima = new ManipuladorArquivoPrd(dir,materias);
+            this.Diretorio = dir;
+            this.ArquivoItemProducao = itemprd;
+            this.ArquivoMateria = materias;
         }
         public ItemProducao(int id, DateOnly dt, string mp, double qtd)
         {
@@ -89,7 +97,11 @@ namespace _5by5_Biltiful.Modulos.Producao.ClassesProducao
             ItemProducao[] itensProduzidos = new ItemProducao[materiasPrimas];
             while (materiasPrimas != count)
             {   
-                Console.WriteLine("Digite o código da materia prima (por exemplo: MP0001)");
+                if(count == 0)
+                    Console.WriteLine("Digite o código da materia prima (por exemplo: MP0001)");
+                else
+                    Console.WriteLine("Digite o código da próxima materia prima (por exemplo: MP0001)");
+
                 string codMP = Console.ReadLine();
                 if (VerirficarMP(codMP))
                 {
