@@ -24,7 +24,7 @@ namespace biltiful.Modulos
 
         void SubModuloCliente()
         {
-            Console.Write(@"----------- Cliente -----------
+            Console.WriteLine(@">>> Sub Menu Cliente <<<
 
                             [ 1 ] Cadastrar
                             [ 2 ] Localizar
@@ -53,7 +53,7 @@ namespace biltiful.Modulos
 
         void SubModuloFornecedor()
         {
-            Console.Write(@"----------- Fornecedor -----------
+            Console.WriteLine(@">>> Sub Menu Fornecedor <<<
 
                             [ 1 ] Cadastrar
                             [ 2 ] Localizar
@@ -82,7 +82,7 @@ namespace biltiful.Modulos
 
         void SubModuloMateriaPrima()
         {
-            Console.Write(@"----------- Matéria-prima -----------
+            Console.WriteLine(@">>> Sub Menu Materia-prima <<<
 
                             [ 1 ] Cadastrar
                             [ 2 ] Localizar
@@ -111,7 +111,7 @@ namespace biltiful.Modulos
 
         void SubModuloProduto()
         {
-            Console.Write(@"----------- Produto -----------
+            Console.WriteLine(@">>> Sub Menu Produto <<<
 
                             [ 1 ] Cadastrar
                             [ 2 ] Localizar
@@ -142,7 +142,7 @@ namespace biltiful.Modulos
         {
             Console.Clear();
 
-            Console.Write(@"----------- CADASTRO -----------
+            Console.WriteLineLine(@">>> MENU CADASTRO <<<
 
                             [ 1 ] Cliente
                             [ 2 ] Fornecedor

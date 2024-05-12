@@ -22,6 +22,8 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
         {
             List<string> conteudo = new();
 
+            clientes.Sort((cliente1, cliente2) => cliente1.Nome.CompareTo(cliente2.Nome));
+
             foreach (Cliente cliente in clientes)
                 conteudo.Add(cliente.FormatarParaArquivo());
 
@@ -108,7 +110,6 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             List<Cliente> clientes = RecuperarArquivo();
 
             clientes.Add(new Cliente(cpf + nome + dataNascimento + sexo));
-            clientes.Sort((cliente1, cliente2) => cliente1.Nome.CompareTo(cliente2.Nome));
 
             SalvarArquivo(clientes);
 
@@ -176,12 +177,9 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
             Console.WriteLine(">>> BUSCA DE CLIENTES <<<");
 
-            Console.Write("Insira CPF: ");
-            cpf = Console.ReadLine();
+            cpf = LerCPF();
 
-            List<Cliente> clientes = RecuperarArquivo();
-
-            return clientes.Find(cliente => cliente.CPF == cpf);
+            return RecuperarArquivo().Find(cliente => cliente.CPF == cpf);
         }
 
         public void Localizar()

@@ -11,14 +11,14 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
         public DateOnly DataCadastro { get; set; }        //8   (46-53)
         public char Situacao { get; set; }                //1   (54)
 
-        public Produto(string codigoDeBarras, string nome, int valorVenda, char situacao)
+        public Produto(string codigoDeBarras, string nome, int valorVenda)
         {
             CodigoDeBarras = codigoDeBarras;
             Nome = nome.PadRight(20).Substring(0, 20);
             ValorVenda = valorVenda;
             DataUltimaVenda = DateOnly.FromDateTime(DateTime.Now); ;
             DataCadastro = DateOnly.FromDateTime(DateTime.Now); ;
-            Situacao = situacao;
+            Situacao = 'A';
         }
 
         public Produto(string data) 

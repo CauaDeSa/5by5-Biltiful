@@ -31,7 +31,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
         {
             string cnpj, nome, endereco, telefone;
 
-            Console.WriteLine(" ---- CADASTRO DE FORNECEDORES ----");
+            Console.WriteLine(">>> CADASTRO DE FORNECEDOR <<<");
 
             Console.Write("Insira CNPJ: ");
             cnpj = Console.ReadLine();

@@ -18,9 +18,12 @@
             return string.IsNullOrEmpty(nome);
         }
 
-        public static bool ValorVenda(string preco)
+        public static bool ValorVenda(string valor)
         {
-            return int.TryParse(preco, out _);
+            if (!float.TryParse(valor, out float preco))
+                return false;
+
+            return preco >= 0 && preco <= 999.99;
         }
     }
 }
