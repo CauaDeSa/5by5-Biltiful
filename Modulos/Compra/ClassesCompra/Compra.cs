@@ -16,7 +16,7 @@ namespace Compras
         public List<ItemCompra> ItensCompras { get; set; }
 
         // Declara e inicializa a lista de compras
-        private List<Compra> listaDeCompras = new List<Compra>();
+        public List<Compra> listaDeCompras = new List<Compra>();
 
         // Construtor para inicializar a lista de itens
         public Compra()
@@ -24,7 +24,7 @@ namespace Compras
             ItensCompras = new List<ItemCompra>();
         }
 
-        private void ValidarDadosCompra(int id, DateTime dataCompra, string cnpjFornecedor)
+        public void ValidarDadosCompra(int id, DateTime dataCompra, string cnpjFornecedor)
         {
             // valida os dados da compra
             if (id <= 0)
@@ -77,6 +77,28 @@ namespace Compras
             Console.WriteLine($"Compra {compra.Id} cadastrada com sucesso!");
         }
 
+        //public void ExibirItensCompra(List<ItemCompra> itensCompra)
+        //{
+        //    if (itensCompra.Count == 0)
+        //    {
+        //        Console.WriteLine("Nenhum item encontrado para esta compra.");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("\nItens da Compra:");
+        //        Console.WriteLine("-----------------------------------------------------");
+        //        Console.WriteLine("| Nº | Descrição          | Quantidade | Valor Unit. | Valor Total |");
+        //        Console.WriteLine("-----------------------------------------------------");
+
+        //        int contador = 1;
+        //        foreach (ItemCompra item in itensCompra)
+        //        {
+        //            Console.WriteLine($"| {contador,-3} | {item.Descricao,-20} | {item.Quantidade,10} | R${item.ValorUnitario,11:F2} | R${item.ValorTotalItem,11:F2} |");
+        //            contador++;
+        //        }
+        //    }
+        //}
+
         // Método para buscar uma compra por ID
         public Compra BuscarCompraPorId(int id)
         {
@@ -84,7 +106,7 @@ namespace Compras
             return listaDeCompras.FirstOrDefault(c => c.Id == id);
         }
 
-        private void ValidarDadosExclusao(int id)
+        public void ValidarDadosExclusao(int id)
         {
             if (id <= 0)
             {
