@@ -5,7 +5,7 @@
         public static int LerOpcao(int max)
         {
             int opcao;
-            Console.Write("Opcao: ");
+            Console.Write("\nOpcao: ");
 
             while (!int.TryParse(Console.ReadLine(), out opcao) || opcao < 0 || opcao > max)
                 Console.Write("Opcao invalida, tente novamente: ");

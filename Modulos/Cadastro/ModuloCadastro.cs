@@ -18,13 +18,13 @@ namespace biltiful.Modulos
             mProduto = new(caminhoDiretorio, caminhoProduto);
             mPrima = new(caminhoDiretorio, caminhoPrima);
             mFornecedor = new(caminhoDiretorio, caminhoFornecedor);
-            mInadimplente = new(caminhoDiretorio, caminhoRisco);
-            mBloqueado = new(caminhoDiretorio, caminhoBloqueado);
+            mInadimplente = new(caminhoDiretorio, caminhoRisco, caminhoCliente);
+            mBloqueado = new(caminhoDiretorio, caminhoBloqueado, caminhoFornecedor);
         }
 
         void SubModuloCliente()
         {
-            Console.Write(@"----------- Cliente -----------
+            Console.WriteLine(@">>> Sub Menu Cliente <<<
 
                             [ 1 ] Cadastrar
                             [ 2 ] Localizar
@@ -53,7 +53,7 @@ namespace biltiful.Modulos
 
         void SubModuloFornecedor()
         {
-            Console.Write(@"----------- Fornecedor -----------
+            Console.WriteLine(@">>> Sub Menu Fornecedor <<<
 
                             [ 1 ] Cadastrar
                             [ 2 ] Localizar
@@ -82,7 +82,7 @@ namespace biltiful.Modulos
 
         void SubModuloMateriaPrima()
         {
-            Console.Write(@"----------- Matéria-prima -----------
+            Console.WriteLine(@">>> Sub Menu Materia-prima <<<
 
                             [ 1 ] Cadastrar
                             [ 2 ] Localizar
@@ -111,7 +111,7 @@ namespace biltiful.Modulos
 
         void SubModuloProduto()
         {
-            Console.Write(@"----------- Produto -----------
+            Console.WriteLine(@">>> Sub Menu Produto <<<
 
                             [ 1 ] Cadastrar
                             [ 2 ] Localizar
@@ -142,7 +142,7 @@ namespace biltiful.Modulos
         {
             Console.Clear();
 
-            Console.Write(@"----------- CADASTRO -----------
+            Console.WriteLine(@">>> MENU CADASTRO <<<
 
                             [ 1 ] Cliente
                             [ 2 ] Fornecedor

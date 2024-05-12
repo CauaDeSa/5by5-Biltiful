@@ -1,4 +1,4 @@
-﻿using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades;
+using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades;
 using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Validacoes;
 using _5by5_Biltiful.Utils;
 
@@ -21,6 +21,8 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
         public void SalvarArquivo(List<Cliente> clientes)
         {
             List<string> conteudo = new();
+
+            clientes.Sort((cliente1, cliente2) => cliente1.Nome.CompareTo(cliente2.Nome));
 
             foreach (Cliente cliente in clientes)
                 conteudo.Add(cliente.FormatarParaArquivo());
@@ -63,13 +65,13 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
         public char LerSexo()
         {
-            char sexo;
+            string sexo;
             Console.Write("Insira o sexo (M/F): ");
 
-            while (!ValidarCliente.Sexo(sexo = char.Parse(Console.ReadLine())))
+            while (!ValidarCliente.Sexo(sexo = Console.ReadLine()))
                 Console.Write("Sexo invalido, tente novamente: ");
 
-            return sexo;
+            return char.Parse(sexo);
         }
 
         public char LerSituacao()
@@ -89,11 +91,13 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             DateOnly dataNascimento;
             char sexo;
 
+            List<Cliente> clientes = RecuperarArquivo();
+
             Console.WriteLine(">>> CADASTRO DE CLIENTE <<<");
 
             cpf = LerCPF();
 
-            while (RecuperarArquivo().Exists(cliente => cliente.CPF == cpf))
+            while (clientes.Exists(cliente => cliente.CPF == cpf))
             {
                 Console.WriteLine("CPF já cadastrado");
                 cpf = LerCPF();
@@ -105,10 +109,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
             sexo = LerSexo();
 
-            List<Cliente> clientes = RecuperarArquivo();
-
-            clientes.Add(new Cliente(cpf + nome + dataNascimento + sexo));
-            clientes.Sort((cliente1, cliente2) => cliente1.Nome.CompareTo(cliente2.Nome));
+            clientes.Add(new Cliente(cpf, nome, dataNascimento, sexo));
 
             SalvarArquivo(clientes);
 
@@ -118,8 +119,9 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
         public void Editar()
         {
             List<Cliente> clientes = RecuperarArquivo();
-            Cliente cliente;
+            Cliente? cliente;
             string cpfCliente;
+            int opcao;
 
             Console.WriteLine(">>> EDIÇÃO DE CLIENTE <<<");
 
@@ -133,30 +135,38 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                 return;
             }
 
-            Console.WriteLine($"Cliente encontrado: \n{cliente.ToString()}\n\n");
+            Console.WriteLine($"Cliente encontrado: \n{cliente}\n\n");
 
-            Console.WriteLine(@">>> Menu edicao <<<
-
-                                [ 1 ] - Nome
-                                [ 2 ] - Data de Nascimento
-                                [ 3 ] - Sexo
-                                [ 4 ] - Situacao");
-
-            switch (IO.LerOpcao(3))
+            do
             {
-                case 1:
-                    cliente.Nome = LerNome().PadRight(50).Substring(0, 50);
-                    break;
-                case 2:
-                    cliente.DataNascimento = Formato.ConverterParaData(Formato.LimparFormatacao(LerDataNascimento()));
-                    break;
-                case 3:
-                    cliente.Sexo = LerSexo();
-                    break;
-                case 4:
-                    cliente.Situacao = LerSituacao();
-                    break;
-            }
+                Console.WriteLine(@">>> Menu edicao <<<
+
+                                    [ 1 ] Nome
+                                    [ 2 ] Data de Nascimento
+                                    [ 3 ] Sexo
+                                    [ 4 ] Situacao
+                                    [ 0 ] Voltar");
+
+                opcao = IO.LerOpcao(4);
+
+                Console.Clear();
+
+                switch (opcao)
+                {
+                    case 1:
+                        cliente.Nome = LerNome().PadRight(50).Substring(0, 50);
+                        break;
+                    case 2:
+                        cliente.DataNascimento = Formato.ConverterParaData(Formato.LimparFormatacao(LerDataNascimento()));
+                        break;
+                    case 3:
+                        cliente.Sexo = LerSexo();
+                        break;
+                    case 4:
+                        cliente.Situacao = LerSituacao();
+                        break;
+                }
+            } while (opcao != 0);
 
             SalvarArquivo(clientes);
         }   
@@ -167,12 +177,69 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
             Console.WriteLine(">>> BUSCA DE CLIENTES <<<");
 
-            Console.Write("Insira CPF: ");
-            cpf = Console.ReadLine();
+            cpf = LerCPF();
 
+            return RecuperarArquivo().Find(cliente => cliente.CPF == cpf);
+        }
+
+        public void Localizar()
+        {
+            Cliente? cliente = BuscarPorCPF();
+
+            if (cliente == null)
+            {
+                Console.WriteLine("Cliente não encontrado");
+                return;
+            }
+
+            Console.WriteLine($"\n{cliente}\n\n");
+        }
+
+        public void Imprimir()
+        {
             List<Cliente> clientes = RecuperarArquivo();
+            int opcao, indice;
 
-            return clientes.Find(cliente => cliente.CPF == cpf);
+            if (clientes.Count == 0)
+            {
+                Console.WriteLine("Nenhum cliente cadastrado");
+                return;
+            }
+
+            indice = 0;
+
+            do
+            {
+                Console.Clear();
+
+                Console.WriteLine($"\n{clientes[indice]}\n\n");
+
+                opcao = IO.LerOpcao(4);
+
+                Console.WriteLine(@">>> Menu impressao <<<
+
+                                [ 1 ] Proximo
+                                [ 2 ] Anterior
+                                [ 3 ] Inicio
+                                [ 4 ] Final
+                                [ 0 ] Voltar");
+
+                switch (opcao)
+                {
+                    case 1:
+                        indice = indice == clientes.Count - 1 ? 0 : indice + 1;
+                        break;
+                    case 2:
+                        indice = indice == 0 ? clientes.Count - 1 : indice - 1;
+                        break;
+                    case 3:
+                        indice = 0;
+                        break;
+                    case 4:
+                        indice = clientes.Count - 1;
+                        break;
+                }
+            } while (opcao != 0);
         }
     }
 }

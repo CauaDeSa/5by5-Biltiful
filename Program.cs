@@ -1,4 +1,5 @@
-﻿using biltiful.Modulos;
+﻿using _5by5_Biltiful.Utils;
+using biltiful.Modulos;
 
 namespace biltiful
 {
@@ -26,33 +27,6 @@ namespace biltiful
         static readonly string caminhoProducoes = "Producao.dat";
         static readonly string caminhoItensProducao = "ItemProducao.dat";
 
-        static int OpcaoMenu()
-        {
-            string? input;
-            int opcao;
-        
-            do
-            {
-                do
-                {
-                    Console.WriteLine("\n-- MENU PRINCIPAL --\n");
-
-                    Console.WriteLine("[ 1 ] Secao Cadastro");
-                    Console.WriteLine("[ 2 ] Secao Venda");
-                    Console.WriteLine("[ 3 ] Secao Compra");
-                    Console.WriteLine("[ 4 ] Secao Producao");
-                    Console.WriteLine("[ 0 ] Sair");
-
-                    Console.Write("Selecione uma opcao valida: ");
-                    input = Console.ReadLine();
-
-                } while (int.TryParse(input, out opcao));
-        
-            } while (opcao < 0 || opcao > 4) ;
-
-            return opcao;
-        }
-
         static void Main(string[] args)
         {
             ModuloCadastro moduloCadastro = new(caminhoDiretorioProjeto, caminhoClientes, caminhoProdutos, caminhoMateriasPrimas, caminhoFornecedores, caminhoRiscos, caminhoBloqueados);
@@ -64,9 +38,16 @@ namespace biltiful
 
             do
             {
+                Console.WriteLine(@">>> MENU PRINCIPAL <<<
+                            
+                                     [ 1 ] Secao Cadastro
+                                     [ 2 ] Secao Venda
+                                     [ 3 ] Secao Compra
+                                     [ 4 ] Secao Producao
+                                     [ 0 ] Sair");
                 Console.Clear();
 
-                opcao = OpcaoMenu();
+                opcao = IO.LerOpcao(4);
 
                 switch (opcao)
                 {
