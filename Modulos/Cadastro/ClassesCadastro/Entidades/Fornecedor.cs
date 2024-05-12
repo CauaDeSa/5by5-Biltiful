@@ -19,19 +19,19 @@
             Situacao = situacao;
         }
 
-        //public class Fornecedor(string FornecedorEmFormatoArquivo)
-        //{
+        public class Fornecedor(string FornecedorEmFormatoArquivo)
+        {
 
-        //}
+        }
 
-        //public string FormatarParaArquivo()
-        //{
+        public string FormatarParaArquivo()
+        {
 
-        //}
+        }
 
-        //static bool VerificarCodigoDeBarras(string codigo)
-        //{
+        static bool VerificarCodigoDeBarras(string codigo)
+        {
 
-        //}
+        }
     }
 }
