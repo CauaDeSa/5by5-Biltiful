@@ -174,18 +174,5 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
             return clientes.Find(cliente => cliente.CPF == cpf);
         }
-
-        public void Localizar()
-        {
-            Cliente? cliente = BuscarPorCPF();
-
-            if (cliente == null)
-            {
-                Console.WriteLine("Cliente não encontrado");
-                return;
-            }
-
-            Console.WriteLine(cliente.ToString());
-        }
     }
 }

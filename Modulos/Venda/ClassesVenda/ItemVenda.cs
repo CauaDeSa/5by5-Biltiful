@@ -1,14 +1,16 @@
-﻿namespace _5by5_Biltiful.Modulos.Venda
+﻿using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades;
+
+namespace _5by5_Biltiful.Modulos.Venda
 {
-    internal class ItemVendaProduto
+    internal class ItemVenda
     {
-        public int IdVenda { get; set; }             //5  (0-4)
+        public int Id { get; set; }             //5  (0-4)
         public string Produto { get; set; } //é o código de barras do produto  - 13 (5-17)
         public int Quantidade { get; set; }             //3 (18-20)
-        public int ValorUnitário { get; set; }          //5  (21-25)
+        public int ValorUnitario { get; set; }          //5  (21-25)
         public int ValorTotal { get; set; }             //6  (26-31)
 
-        public ItemVendaProduto(int idVenda, string produto, int quantidade, int valorUnitário, int valorTotal)
+        public ItemVenda(int id, string produto, int quantidade, int valorUnitario, int valorTotal)
         {
             IdVenda = idVenda;
             Produto = produto;
@@ -16,7 +18,7 @@
             ValorUnitário = valorUnitário;
             ValorTotal = valorTotal;
         }
-        public ItemVendaProduto(string data)
+        public ItemVenda(string data)
         {
             IdVenda = int.Parse(data.Substring(0, 5));
             Produto = data.Substring(5, 17);
@@ -30,7 +32,7 @@
         }
         public string FormatarParaArquivoVenda()
         {
-            return IdVenda + Produto + Quantidade + ValorUnitário + ValorTotal;
+            return Id + Produto + Quantidade + ValorUnitario + ValorTotal;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
         }
 
-        public Produto? BuscarPorCodigoBarras()
+        public Produto? BuscarPorCodigoBarras(string codigoBarras)
         {
 
         }
