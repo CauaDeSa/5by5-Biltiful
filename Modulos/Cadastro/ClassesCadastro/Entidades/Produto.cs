@@ -38,12 +38,9 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
             return CodigoDeBarras + Nome + ValorVenda + Formato.LimparFormatacao(DataUltimaVenda.ToString()) + Formato.LimparFormatacao(DataCadastro.ToString()) + Situacao;
         }
 
-        static string FormatarNome(string nome)
+        public override string ToString()
         {
-            for (int i = nome.Length; i < 50; i++)
-                nome += " ";
-
-            return nome.Substring(0, 50);
+            return $"Codigo de Barras: {CodigoDeBarras}\nNome: {Nome}\nValor de Venda: {ValorVenda}\nData ultima venda: {DataUltimaVenda}\nData cadastro: {DataCadastro}\nSituacao: {Situacao}";
         }
     }
 }

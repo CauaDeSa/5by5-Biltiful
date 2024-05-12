@@ -37,5 +37,10 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
         {
             return CNPJ + RazaoSocial + Formato.LimparFormatacao(DataAbertura.ToString()) + Formato.LimparFormatacao(DataUltimaCompra.ToString()) + Formato.LimparFormatacao(DataCadastro.ToString()) + Situacao;
         } 
+
+        public override string ToString()
+        {
+            return $"CNPJ: {CNPJ}\nRazao Social: {RazaoSocial}\nData de Abertura: {DataAbertura}\nData ultima compra: {DataUltimaCompra}\nData cadastro: {DataCadastro}\nSituacao: {Situacao}";
+        }
     }
 }

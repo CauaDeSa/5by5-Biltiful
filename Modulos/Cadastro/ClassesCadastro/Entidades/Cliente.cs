@@ -42,7 +42,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
 
         public override string ToString()
         {
-            return $"CPF: {CPF}\nNome: {Nome}\nData de Nascimento: {DataNascimento}\nSexo: {Sexo}\nSituacao: {Situacao}";
+            return $"CPF: {CPF}\nNome: {Nome}\nData de Nascimento: {DataNascimento}\nSexo: {Sexo}\nData ultima compra: {DataUltimaCompra}\nData cadastro: {DataCadastro}\nSituacao: {Situacao}";
         }
     }
 }
