@@ -92,13 +92,14 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             Console.WriteLine(">>> CADASTRO DE CLIENTE <<<");
 
             cpf = LerCPF();
+
             while (RecuperarArquivo().Exists(cliente => cliente.CPF == cpf))
             {
                 Console.WriteLine("CPF já cadastrado");
                 cpf = LerCPF();
             }
 
-            nome = LerNome().PadRight(50).Substring(0, 50);
+            nome = LerNome();
 
             dataNascimento = Formato.ConverterParaData(Formato.LimparFormatacao(LerDataNascimento()));
 
