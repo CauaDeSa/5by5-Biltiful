@@ -30,7 +30,7 @@
             return conteudo;
         }
 
-        public void Escrever(List<string> conteudo)
+        protected void Escrever(List<string> conteudo)
         {
             File.WriteAllLines(CaminhoDiretorio + CaminhoArquivo, conteudo);
         }
