@@ -142,6 +142,8 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                                 [ 3 ] - Sexo
                                 [ 4 ] - Situacao");
 
+            Console.Clear();
+
             switch (IO.LerOpcao(3))
             {
                 case 1:
@@ -185,7 +187,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                 return;
             }
 
-            Console.WriteLine(cliente.ToString());
+            Console.WriteLine($"\n{cliente.ToString()}\n\n");
         }
     }
 }
