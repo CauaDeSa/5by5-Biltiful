@@ -5,6 +5,7 @@
         public static int LerOpcao(int max)
         {
             int opcao;
+            Console.Write("Opcao: ");
 
             while (!int.TryParse(Console.ReadLine(), out opcao) || opcao < 0 || opcao > max)
                 Console.Write("Opcao invalida, tente novamente: ");
@@ -15,6 +16,7 @@
         public static DateOnly LerData()
         {
             DateOnly data;
+            Console.write("Data: ");1
 
             while (!DateOnly.TryParse(Console.ReadLine(), out data))
                 Console.Write("Data invalida, tente novamente: ");

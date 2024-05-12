@@ -32,6 +32,8 @@ namespace biltiful.Modulos
                             [ 4 ] Imprimir
                             [ 0 ] Voltar");
 
+            Console.Clear();
+
             switch (IO.LerOpcao(4))
             {
                 case 1:
@@ -58,6 +60,8 @@ namespace biltiful.Modulos
                             [ 3 ] Editar
                             [ 4 ] Imprimir
                             [ 0 ] Voltar");
+
+            Console.Clear();
 
             switch (IO.LerOpcao(4))
             {
@@ -86,6 +90,8 @@ namespace biltiful.Modulos
                             [ 4 ] Imprimir
                             [ 0 ] Voltar");
 
+            Console.Clear();
+
             switch (IO.LerOpcao(4))
             {
                 case 1:
@@ -112,6 +118,8 @@ namespace biltiful.Modulos
                             [ 3 ] Editar
                             [ 4 ] Imprimir
                             [ 0 ] Voltar");
+
+            Console.Clear();
 
             switch (IO.LerOpcao(4))
             {
@@ -141,6 +149,8 @@ namespace biltiful.Modulos
                             [ 3 ] Matéria-prima
                             [ 4 ] Produto
                             [ 0 ] Voltar");
+
+            Console.Clear();
 
             switch (IO.LerOpcao(4))
             {
