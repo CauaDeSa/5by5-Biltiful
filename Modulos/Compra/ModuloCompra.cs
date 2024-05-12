@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-namespace Compras
+﻿using _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades;
+using Compras;
+using System;
+namespace biltiful.Modulos
 {
-    internal class Program
+    internal class ModuloCompra
     {
         static void Main(string[] args)
         {
-            // Diretório onde os arquivos serão salvos
-            string caminhoDiretorio = "";
-
-            // Caminhos para os arquivos de compras e itens de compra
-            string caminhoArquivoCompras = "compras.txt";
-            string caminhoArquivoItens = "itens.txt";
+            string caminhoDiretorio = ;
+            string caminhoArquivoCompras = "";
+            string caminhoArquivoItens = "";
 
             // Criar uma instância da classe Compras
             Compras compras = new Compras(caminhoDiretorio, caminhoArquivoCompras, caminhoArquivoItens);
