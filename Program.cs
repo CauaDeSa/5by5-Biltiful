@@ -31,8 +31,8 @@ namespace biltiful
         {
             ModuloCadastro moduloCadastro = new(caminhoDiretorioProjeto, caminhoClientes, caminhoProdutos, caminhoMateriasPrimas, caminhoFornecedores, caminhoRiscos, caminhoBloqueados);
             //ModuloVenda moduloVenda = new(caminhoDiretorioProjeto, caminhoVendas, caminhoItensVenda);
-            //ModuloCompra moduloCompra = new(caminhoDiretorioProjeto, caminhoCompras, caminhoItensCompra);
-            //ModuloProducao moduloProducao = new(caminhoDiretorioProjeto, caminhoProducoes, caminhoItensProducao);
+            ModuloCompra moduloCompra = new(caminhoDiretorioProjeto, caminhoCompras, caminhoItensCompra);
+            ModuloProducao moduloProducao = new(caminhoDiretorioProjeto, caminhoProducoes, caminhoItensProducao, caminhoProdutos, caminhoMateriasPrimas);
 
             int opcao;
 
@@ -61,9 +61,9 @@ namespace biltiful
                     //case 3:
                     //    moduloCompra.Executar();
                     //    break;
-                    //case 4:
-                    //    moduloProducao.Executar();
-                    //    break;
+                    case 4:
+                        moduloProducao.Executar();
+                        break;
                 }
 
             } while (opcao != 0);

@@ -154,7 +154,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             Console.WriteLine("Produto editado com sucesso!");
         }
 
-        public Produto? BuscarPorCodigoBarras()
+        public Produto? BuscarPorCodigoBarras(string codigoBarras)
         {
             string codigoBarras;
 
