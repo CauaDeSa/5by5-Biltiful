@@ -25,7 +25,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             produtos.Sort((produtoA, produtoB) => produtoA.Nome.CompareTo(produtoB.Nome));
 
             foreach (Produto produto in produtos)
-                conteudo.Add(produto.ToString());
+                conteudo.Add(produto.FormatarParaArquivo());
 
             Escrever(conteudo);
         }
@@ -123,7 +123,8 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
             do
             {
-                Console.WriteLine(@">>> Menu edicao <<<
+                Console.WriteLine(@"
+                                    >>> Menu edicao <<<
 
                                     [ 1 ] Nome
                                     [ 2 ] Valor venda
@@ -142,7 +143,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                     case 2:
                         produto.ValorVenda = LerValorVenda();
                         break;
-                    case 3: 
+                    case 3:
                         produto.Situacao = LerSituacao();
                         break;
                 }
@@ -196,7 +197,8 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
                 Console.WriteLine($"\n{produtos[indice]}\n\n");
 
-                Console.WriteLine(@">>> Menu impressao <<<
+                Console.WriteLine(@"
+                                >>> Menu impressao <<<
 
                                 [ 1 ] Proximo
                                 [ 2 ] Anterior
@@ -205,6 +207,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                                 [ 0 ] Voltar");
 
                 option = IO.LerOpcao(4);
+                Console.Clear();
 
                 switch (option)
                 {

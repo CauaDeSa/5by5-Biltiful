@@ -23,7 +23,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             List<string> conteudo = new();
 
             foreach (Fornecedor fornecedor in fornecedores)
-                conteudo.Add(fornecedor.ToString());
+                conteudo.Add(fornecedor.FormatarParaArquivo());
 
             Escrever(conteudo);
         }
@@ -96,6 +96,8 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             fornecedores.Add(new Fornecedor(cnpjFornecedor, razaoSocial, dataAbertura));
 
             SalvarArquivo(fornecedores);
+
+            Console.WriteLine("Fornecedor cadastrado com sucesso!");
         }
 
         public void Editar()
@@ -118,11 +120,12 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                 return;
             }
 
-            Console.WriteLine($"Cliente encontrado: \n{fornecedor}\n\n");
+            Console.WriteLine($"Fornecedor encontrado: \n\n{fornecedor}\n\n");
 
             do
             {
-                Console.WriteLine(@">>> Menu edicao <<<
+                Console.WriteLine(@"
+                                    >>> Menu edicao <<<
 
                                     [ 1 ] Razao Social
                                     [ 2 ] Data Abertura
@@ -195,15 +198,18 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
                 Console.WriteLine($"\n{fornecedores[indice]}\n\n");
 
-                opcao = IO.LerOpcao(4);
 
-                Console.WriteLine(@">>> Menu impressao <<<
+                Console.WriteLine(@"
+                                >>> Menu impressao <<<
 
                                 [ 1 ] Proximo
                                 [ 2 ] Anterior
                                 [ 3 ] Inicio
                                 [ 4 ] Final
                                 [ 0 ] Voltar");
+
+                opcao = IO.LerOpcao(4);
+                Console.Clear();
 
                 switch (opcao)
                 {

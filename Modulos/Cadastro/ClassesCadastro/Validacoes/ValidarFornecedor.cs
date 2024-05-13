@@ -7,9 +7,6 @@
             if (cnpj.Length != 14)
                 return false;
 
-            if (!int.TryParse(cnpj, out _))
-                return false;
-
             if (cnpj.Count(value => value == cnpj[0]) > cnpj.Length - 1)
                 return false;
 
@@ -20,7 +17,7 @@
         {
             int result = 0;
 
-            for (int posicao = 0, multiplicador = 4 + dv; posicao < 12; posicao++, multiplicador--)
+            for (int posicao = 0, multiplicador = 4 + dv; posicao < 11 + dv; posicao++, multiplicador--)
             {
                 if (multiplicador == 1)
                     multiplicador = 9;
@@ -39,7 +36,7 @@
 
         public static bool DataAbertura(string data)
         {
-            return data.Length == 8 && DateOnly.TryParse(data, out _);
+            return (DateOnly.TryParseExact(data, "ddMMyyyy", out DateOnly dateOnly) && !(dateOnly > DateOnly.FromDateTime(DateTime.Now)));
         }
     }
 }

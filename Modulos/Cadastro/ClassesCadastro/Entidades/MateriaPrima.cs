@@ -19,7 +19,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
             Situacao = 'A';
         }
 
-        public MateriaPrima(string data) 
+        public MateriaPrima(string data)
         {
             Id = int.Parse(data.Substring(0, 6));
             Nome = data.Substring(6, 20);
@@ -32,7 +32,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
 
         public string FormatarParaArquivo()
         {
-            return Id + Nome + Formato.LimparFormatacao(DataUltimaCompra.ToString()) + Formato.LimparFormatacao(DataCadastro.ToString()) + Situacao;
+            return $"{Id:000000}" + Nome + Formato.LimparFormatacao(DataUltimaCompra.ToString()) + Formato.LimparFormatacao(DataCadastro.ToString()) + Situacao;
         }
 
         public override string ToString()

@@ -1,4 +1,5 @@
 ﻿using _5by5_Biltiful.Utils;
+using System;
 
 namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Validacoes
 {
@@ -11,9 +12,6 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Validacoes
             if (cpf.Length != 11)
                 return false;
 
-            if (!int.TryParse(cpf, out _))
-                return false;
-
             if (cpf.Count(value => value == cpf[0]) > cpf.Length - 1)
                 return false;
 
@@ -24,27 +22,27 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Validacoes
         {
             int result = 0;
 
-            for (int posicao = 0, multiplicador = 8 + dv; posicao < 9; posicao++, multiplicador--)
+            for (int posicao = 0, multiplicador = 9 + dv; posicao < 8 + dv; posicao++, multiplicador--)
                 result += int.Parse(cpf.Substring(posicao, 1)) * multiplicador;
 
-            result %= 11;
+            result = (result * 10) % 11;
 
             return (result == 10 ? 0 : result) == int.Parse(cpf.Substring(8 + dv, 1));
         }
 
         public static bool Nome(string nome)
         {
-            return string.IsNullOrEmpty(nome);
+            return !string.IsNullOrEmpty(nome);
         }
 
-        public static bool DataNascimento(string data)
+        public static bool DataNascimento(string? data)
         {
-            return data.Length == 8 DateOnly.TryParse(data, out _);
+            return (DateOnly.TryParseExact(data, "ddMMyyyy", out DateOnly dateOnly) && !(dateOnly > DateOnly.FromDateTime(DateTime.Now)));
         }
 
         public static bool Sexo(string sexo)
         {
-            return string.IsNullOrEmpty(sexo) && sexo.Length == 1;
+            return !string.IsNullOrEmpty(sexo) && sexo.Length == 1;
         }
     }
 }

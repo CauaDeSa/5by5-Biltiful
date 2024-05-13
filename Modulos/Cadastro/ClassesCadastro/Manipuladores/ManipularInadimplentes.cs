@@ -36,7 +36,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             return cpf;
         }
 
-        public void Adicionar()
+        public void Cadastrar()
         {
             string cpf;
             List<string> inadimplentes = RecuperarArquivo();
@@ -53,9 +53,14 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
             inadimplentes.Add(cpf);
 
+            List<Cliente> clientes = mCliente.RecuperarArquivo();
+            Cliente cliente = clientes.Find(cliente => cliente.CPF.Equals(cpf));
+            cliente.Situacao = 'I';
+
             Console.WriteLine("CPF cadastrado na lista de inadimplentes!");
 
             SalvarArquivo(inadimplentes);
+            mCliente.SalvarArquivo(clientes);
         }
 
         public void Remover()
@@ -73,11 +78,16 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                 return;
             }
 
+            List<Cliente> clientes = mCliente.RecuperarArquivo();
+            Cliente cliente = clientes.Find(cliente => cliente.CPF.Equals(cpf));
+            cliente.Situacao = 'A';
+
             inadimplentes.Remove(cpf);
 
             Console.WriteLine("CPF removido da lista de inadimplentes!");
 
             SalvarArquivo(inadimplentes);
+            mCliente.SalvarArquivo(clientes);
         }
 
         public Cliente? BuscarPorCPF()

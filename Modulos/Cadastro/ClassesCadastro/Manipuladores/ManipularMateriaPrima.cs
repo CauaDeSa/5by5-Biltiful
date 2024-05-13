@@ -23,21 +23,21 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             List<string> conteudo = new();
 
             foreach (MateriaPrima materiaPrima in materiasPrimas)
-                conteudo.Add(materiaPrima.ToString());
+                conteudo.Add(materiaPrima.FormatarParaArquivo());
 
             Escrever(conteudo);
         }
 
         public int LerId()
         {
-            int id;
+            string id;
             Console.Write("Insira o ID: ");
 
             while (ValidarMateriaPrima.ID(id = Console.ReadLine()))
                 Console.Write("ID inválido, tente novamente: ");
 
-            return id;
-        }   
+            return int.Parse(id);
+        }
 
         public string LerNome()
         {
@@ -63,7 +63,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
         public void Cadastrar()
         {
-            int id = 1;
+            int id = 0;
             string nome;
             List<MateriaPrima> materiasPrimas = RecuperarArquivo();
 
@@ -101,10 +101,11 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             }
 
             Console.WriteLine($"Materia prima encontrada: \n{materiaPrima}\n\n");
-            
+
             do
             {
-                Console.WriteLine(@">>> Menu edicao <<<
+                Console.WriteLine(@"
+                                    >>> Menu edicao <<<
 
                                     [ 1 ] Nome
                                     [ 2 ] Situacao
@@ -117,14 +118,14 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                 switch (opcao)
                 {
                     case 1:
-                        materiaPrima.Nome = LerNome().PadRight(50).Substring(0, 50);
+                        materiaPrima.Nome = LerNome().PadRight(20).Substring(0, 20);
                         break;
                     case 2:
                         materiaPrima.Situacao = LerSituacao();
                         break;
                 }
             } while (opcao != 0);
-            
+
             SalvarArquivo(materiasPrimas);
         }
 
@@ -156,10 +157,10 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
         {
             List<MateriaPrima> materiasPrimas = RecuperarArquivo();
 
-            Console.WriteLine(">>> LISTA DE MATERIAS PRIMAS <<<");
+            Console.WriteLine(">>> LISTA DE MATERIAS PRIMAS <<<\n");
 
             foreach (MateriaPrima materiaPrima in materiasPrimas)
-                Console.WriteLine(materiaPrima);
+                Console.WriteLine($"{materiaPrima}\n");
         }
     }
 }
