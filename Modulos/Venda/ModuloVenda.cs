@@ -57,7 +57,7 @@ namespace biltiful.Modulos
             {
                 Console.WriteLine("Informe o código de barras do produto:");   
                 var codigoProduto = Console.ReadLine();
-                Produto? produto = new Produto("7891", "Protetor Solar", 10, 'A');// todo: usa a busca de produto quando estiver funcionando - manipularProduto.BuscarPorCodigoBarras(codigoProduto);
+                Produto? produto = new Produto("7891", "Protetor Solar", "10");// todo: usa a busca de produto quando estiver funcionando - manipularProduto.BuscarPorCodigoBarras(codigoProduto);
                 if (cliente == null)
                 {
                     Console.WriteLine("Produto não encontrado. Informe outro código.");
@@ -72,7 +72,7 @@ namespace biltiful.Modulos
                     return;
                 }
 
-                ItemVenda item = new ItemVenda(idVenda, codigoProduto, quantidadeProduto, produto.ValorVenda, (quantidadeProduto * produto.ValorVenda));
+                ItemVenda item = new ItemVenda(idVenda, codigoProduto, quantidadeProduto, int.Parse(produto.ValorVenda), (quantidadeProduto * int.Parse(produto.ValorVenda)));
                 itens.Add(item);
 
                 cont++;

@@ -5,9 +5,9 @@ namespace biltiful.Modulos
 {
     internal class ModuloCompra
     {
-        static void Main(string[] args)
+        static void MainCompra(string[] args)
         {
-            string caminhoDiretorio = ;
+            string caminhoDiretorio = "";
             string caminhoArquivoCompras = "";
             string caminhoArquivoItens = "";
 
