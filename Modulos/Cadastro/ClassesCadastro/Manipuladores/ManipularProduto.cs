@@ -102,8 +102,8 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
         public void Editar()
         {
-            string codigoBarras, nome, descricao, valorVenda;
             int opcao;
+            string codigoBarras;
 
             Console.WriteLine(">>> EDIÇÃO DE PRODUTOS <<<");
 
@@ -154,7 +154,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             Console.WriteLine("Produto editado com sucesso!");
         }
 
-        public Produto? BuscarPorCodigoBarras(string codigoBarras)
+        public Produto? BuscarPorCodigoBarras()
         {
             string codigoBarras;
 

@@ -16,12 +16,12 @@ namespace biltiful
         static readonly string caminhoBloqueados = "Bloqueado.dat";
 
         //MODULO 2 VENDA
-        static readonly string caminhoVendas = "Venda.dat";
-        static readonly string caminhoItensVenda = "ItemVenda.dat";
+        //static readonly string caminhoVendas = "Venda.dat";
+        //static readonly string caminhoItensVenda = "ItemVenda.dat";
 
         //MODULO 3 COMPRA
-        static readonly string caminhoCompras = "Compra.dat";
-        static readonly string caminhoItensCompra = "ItemCompra.dat";
+        //static readonly string caminhoCompras = "Compra.dat";
+        //static readonly string caminhoItensCompra = "ItemCompra.dat";
 
         //MODULO 4 PRODUCAO
         static readonly string caminhoProducoes = "Producao.dat";
@@ -31,7 +31,7 @@ namespace biltiful
         {
             ModuloCadastro moduloCadastro = new(caminhoDiretorioProjeto, caminhoClientes, caminhoProdutos, caminhoMateriasPrimas, caminhoFornecedores, caminhoRiscos, caminhoBloqueados);
             //ModuloVenda moduloVenda = new(caminhoDiretorioProjeto, caminhoVendas, caminhoItensVenda);
-            ModuloCompra moduloCompra = new(caminhoDiretorioProjeto, caminhoCompras, caminhoItensCompra);
+            //ModuloCompra moduloCompra = new(caminhoDiretorioProjeto, caminhoCompras, caminhoItensCompra);
             ModuloProducao moduloProducao = new(caminhoDiretorioProjeto, caminhoProducoes, caminhoItensProducao, caminhoProdutos, caminhoMateriasPrimas);
 
             int opcao;
