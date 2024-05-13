@@ -36,7 +36,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
         public string FormatarParaArquivo()
         {
             return CNPJ + RazaoSocial + Formato.LimparFormatacao(DataAbertura.ToString()) + Formato.LimparFormatacao(DataUltimaCompra.ToString()) + Formato.LimparFormatacao(DataCadastro.ToString()) + Situacao;
-        } 
+        }
 
         public override string ToString()
         {

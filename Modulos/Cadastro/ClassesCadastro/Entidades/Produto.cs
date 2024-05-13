@@ -21,7 +21,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro.Entidades
             Situacao = 'A';
         }
 
-        public Produto(string data) 
+        public Produto(string data)
         {
             CodigoDeBarras = data.Substring(0, 13);
             Nome = data.Substring(13, 20);

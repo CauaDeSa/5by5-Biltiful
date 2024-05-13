@@ -38,16 +38,17 @@ namespace biltiful
 
             do
             {
-                Console.WriteLine(@">>> MENU PRINCIPAL <<<
+                Console.WriteLine(@"
+                                    >>> MENU PRINCIPAL <<<
                             
                                      [ 1 ] Secao Cadastro
                                      [ 2 ] Secao Venda
                                      [ 3 ] Secao Compra
                                      [ 4 ] Secao Producao
                                      [ 0 ] Sair");
-                Console.Clear();
 
                 opcao = IO.LerOpcao(4);
+                Console.Clear();
 
                 switch (opcao)
                 {

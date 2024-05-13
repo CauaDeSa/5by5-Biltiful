@@ -46,7 +46,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             string nome;
             Console.Write("Insira o nome: ");
 
-            while (ValidarCliente.Nome(nome = Console.ReadLine()))
+            while (!ValidarCliente.Nome(nome = Console.ReadLine()))
                 Console.Write("Nome invalido, tente novamente: ");
 
             return nome;
@@ -57,7 +57,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             string dataNascimento;
             Console.Write("Insira a data de nascimento: ");
 
-            while (!ValidarCliente.DataNascimento(dataNascimento = Console.ReadLine()))
+            while (!ValidarCliente.DataNascimento(Formato.LimparFormatacao(dataNascimento = Console.ReadLine())))
                 Console.Write("Data de nascimento invalida, tente novamente: ");
 
             return dataNascimento;
@@ -97,7 +97,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
             cpf = LerCPF();
 
-            while (clientes.Exists(cliente => cliente.CPF == cpf))
+            while (clientes.Exists(cliente => Formato.LimparFormatacao(cliente.CPF) == Formato.LimparFormatacao(cpf)))
             {
                 Console.WriteLine("CPF já cadastrado");
                 cpf = LerCPF();
@@ -135,11 +135,12 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
                 return;
             }
 
-            Console.WriteLine($"Cliente encontrado: \n{cliente}\n\n");
+            Console.WriteLine($"Cliente encontrado: \n\n{cliente}\n\n");
 
             do
             {
-                Console.WriteLine(@">>> Menu edicao <<<
+                Console.WriteLine(@"
+                                    >>> Menu edicao <<<
 
                                     [ 1 ] Nome
                                     [ 2 ] Data de Nascimento
@@ -169,7 +170,7 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
             } while (opcao != 0);
 
             SalvarArquivo(clientes);
-        }   
+        }
 
         private Cliente? BuscarPorCPF()
         {
@@ -214,15 +215,17 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
                 Console.WriteLine($"\n{clientes[indice]}\n\n");
 
-                opcao = IO.LerOpcao(4);
-
-                Console.WriteLine(@">>> Menu impressao <<<
+                Console.WriteLine(@"
+                                >>> Menu impressao <<<
 
                                 [ 1 ] Proximo
                                 [ 2 ] Anterior
                                 [ 3 ] Inicio
                                 [ 4 ] Final
                                 [ 0 ] Voltar");
+
+                opcao = IO.LerOpcao(4);
+                Console.Clear();
 
                 switch (opcao)
                 {

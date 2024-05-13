@@ -53,9 +53,14 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
             cnpjBloqueados.Add(cnpj);
 
+            List<Fornecedor> fornecedores = mFornecedor.RecuperarArquivo();
+            Fornecedor fornecedor = fornecedores.Find(fornecedor => fornecedor.CNPJ.Equals(cnpj));
+            fornecedor.Situacao = 'I';
+
             Console.WriteLine("CNPJ cadastrado na lista de bloqueados!");
 
             SalvarArquivo(cnpjBloqueados);
+            mFornecedor.SalvarArquivo(fornecedores);
         }
 
         public void Remover()
@@ -75,9 +80,14 @@ namespace _5by5_Biltiful.Modulos.Cadastro.ClassesCadastro
 
             bloqueados.Remove(cnpj);
 
+            List<Fornecedor> fornecedores = mFornecedor.RecuperarArquivo();
+            Fornecedor fornecedor = fornecedores.Find(fornecedor => fornecedor.CNPJ.Equals(cnpj));
+            fornecedor.Situacao = 'A';
+
             Console.WriteLine("CNPJ removido da lista de bloqueados!");
 
             SalvarArquivo(bloqueados);
+            mFornecedor.SalvarArquivo(fornecedores);
         }
 
         public Fornecedor? BuscarPorCNPJ()
